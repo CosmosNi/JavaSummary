@@ -1,0 +1,13 @@
+{
+    "plugins": [ "github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code", "-lunr", 
+          "-search", 
+          "search-pro" ],
+    "pluginsConfig": {
+        "github": {
+            "url": "https://github.com/CosmosNi/cosmos-tutorial"
+        },
+	"theme-default": {
+        "showLevel": true
+		}
+    }
+}
