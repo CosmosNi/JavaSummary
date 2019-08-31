@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>JVM虚拟机 · GitBook</title>
+        <title>SpringMVC · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -73,10 +73,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../THREAD/BASE.html" />
+    <link rel="next" href="../NIO/BASE.html" />
     
     
-    <link rel="prev" href="../JDK/BASE.html" />
+    <link rel="prev" href="BASE.html" />
     
 
     </head>
@@ -135,9 +135,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="BASE.html">
+        <li class="chapter " data-level="1.3" data-path="../JVM/BASE.html">
             
-                <a href="BASE.html">
+                <a href="../JVM/BASE.html">
             
                     
                         <b>1.3.</b>
@@ -246,9 +246,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="../SPRING/BASE.html">
+        <li class="chapter " data-level="1.7" data-path="BASE.html">
             
-                <a href="../SPRING/BASE.html">
+                <a href="BASE.html">
             
                     
                         <b>1.7.</b>
@@ -262,9 +262,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.7.1" data-path="../SPRING/springMVC.html">
+        <li class="chapter active" data-level="1.7.1" data-path="springMVC.html">
             
-                <a href="../SPRING/springMVC.html">
+                <a href="springMVC.html">
             
                     
                         <b>1.7.1.</b>
@@ -474,7 +474,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >JVM虚拟机</a>
+        <a href=".." >SpringMVC</a>
     </h1>
 </div>
 
@@ -489,19 +489,18 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="jvm&#x865A;&#x62DF;&#x673A;">JVM&#x865A;&#x62DF;&#x673A;</h1>
-<h6 id="11-&#x7A0B;&#x5E8F;&#x8BA1;&#x6570;&#x5668;&#xFF08;&#x7EBF;&#x7A0B;&#x79C1;&#x6709;&#xFF09;">1.1 &#x7A0B;&#x5E8F;&#x8BA1;&#x6570;&#x5668;&#xFF08;&#x7EBF;&#x7A0B;&#x79C1;&#x6709;&#xFF09;</h6>
-<p>&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6240;&#x6267;&#x884C;&#x7684;&#x5B57;&#x8282;&#x7801;&#x7684;&#x884C;&#x53F7;&#x6307;&#x793A;&#x5668;&#xFF0C;&#x6BCF;&#x6761;&#x7EBF;&#x7A0B;&#x90FD;&#x8981;&#x6709;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x7A0B;&#x5E8F;&#x8BA1;&#x6570;&#x5668;&#x3002;&#xFF08;&#x6307;&#x4EE4;&#x7684;&#x6267;&#x884C;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x62A2;&#x5360;cpu&#x8D44;&#x6E90;&#x7684;&#xFF08;cpu&#x5206;&#x914D;&#x65F6;&#x95F4;&#x7247;&#xFF09;&#xFF0C;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x53EF;&#x80FD;&#x6267;&#x884C;&#x4E86;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x540E;&#xFF0C;&#x5C31;&#x88AB;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x62A2;&#x5360;&#x4E86;&#x8D44;&#x6E90;&#x3002;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x7A0B;&#x5E8F;&#x8BA1;&#x6570;&#x5668;&#x6765;&#x8BB0;&#x5F55;&#x5F53;&#x524D;&#x6267;&#x884C;&#x5230;&#x7684;&#x884C;&#x53F7;&#x3002;&#xFF09;</p>
-<p>&#x5BF9;&#x4E8E;java&#x65B9;&#x6CD5;&#xFF0C;&#x8BA1;&#x6570;&#x5668;&#x8BB0;&#x5F55;&#x7684;&#x662F;&#x865A;&#x62DF;&#x673A;&#x5B57;&#x8282;&#x7801;&#x6307;&#x4EE4;&#x7684;&#x5730;&#x5740;&#x3002;&#x5BF9;&#x4E8E;Native&#x65B9;&#x6CD5;&#xFF0C;&#x5219;&#x4E3A;&#x7A7A;&#x3002;</p>
-<h6 id="12-&#x865A;&#x62DF;&#x673A;&#x6808;&#xFF08;&#x7EBF;&#x7A0B;&#x79C1;&#x6709;&#xFF09;">1.2 &#x865A;&#x62DF;&#x673A;&#x6808;&#xFF08;&#x7EBF;&#x7A0B;&#x79C1;&#x6709;&#xFF09;</h6>
-<p>&#x662F;&#x63CF;&#x8FF0;java&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x7684;&#x5185;&#x5B58;&#x6A21;&#x578B;&#x3002;&#x6BCF;&#x4E2A;&#x65B9;&#x6CD5;&#x5728;&#x6267;&#x884C;&#x7684;&#x540C;&#x65F6;&#x90FD;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6808;&#x5E27;&#xFF0C;&#x7528;&#x4E8E;&#x5B58;&#x50A8;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#x8868;&#xFF0C;&#x64CD;&#x4F5C;&#x6570;&#x6808;&#xFF0C;&#x52A8;&#x6001;&#x94FE;&#x63A5;&#xFF0C;&#x65B9;&#x6CD5;&#x51FA;&#x53E3;&#x7B49;&#x4FE1;&#x606F;&#x3002;&#x6BCF;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#x4ECE;&#x8C03;&#x7528;&#x76F4;&#x81F3;&#x6267;&#x884C;&#x5B8C;&#x6210;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x5C31;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x6808;&#x5E27;&#x5728;&#x865A;&#x62DF;&#x673A;&#x6808;&#x4E2D;&#x5165;&#x6808;&#x5230;&#x51FA;&#x6808;&#x7684;&#x8FC7;&#x7A0B;&#x3002;</p>
-<p>&#x6808;&#x5E27;&#x968F;&#x7740;&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x800C;&#x521B;&#x5EFA;&#xFF0C;&#x968F;&#x7740;&#x65B9;&#x6CD5;&#x7ED3;&#x675F;&#x800C;&#x9500;&#x6BC1;&#x3002;</p>
-<h6 id="13-&#x672C;&#x5730;&#x65B9;&#x6CD5;&#x533A;&#xFF08;&#x7EBF;&#x7A0B;&#x79C1;&#x6709;&#xFF09;">1.3 &#x672C;&#x5730;&#x65B9;&#x6CD5;&#x533A;&#xFF08;&#x7EBF;&#x7A0B;&#x79C1;&#x6709;&#xFF09;</h6>
-<p>&#x7C7B;&#x4F3C;&#x865A;&#x62DF;&#x673A;&#x6808;&#x3002;&#x533A;&#x522B;&#x5728;&#x4E8E;&#x672C;&#x5730;&#x65B9;&#x6CD5;&#x6808;&#x4E3A;Native&#x65B9;&#x6CD5;&#x670D;&#x52A1;&#x3002;</p>
-<h6 id="14-&#x5806;&#xFF08;&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#xFF0C;&#x7EBF;&#x7A0B;&#x5171;&#x4EAB;&#xFF09;">1.4 &#x5806;&#xFF08;&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;&#xFF0C;&#x7EBF;&#x7A0B;&#x5171;&#x4EAB;&#xFF09;</h6>
-<p>&#x521B;&#x5EFA;&#x7684;&#x5BF9;&#x8C61;&#x548C;&#x6570;&#x7EC4;&#x90FD;&#x4FDD;&#x5B58;&#x5728;java&#x5806;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x4E5F;&#x662F;&#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;&#x8FDB;&#x884C;&#x5783;&#x573E;&#x6536;&#x96C6;&#x6700;&#x91CD;&#x8981;&#x7684;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x3002;</p>
-<h6 id="15-&#x65B9;&#x6CD5;&#x533A;&#x6C38;&#x4E45;&#x4EE3;&#xFF08;&#x7EBF;&#x7A0B;&#x5171;&#x4EAB;&#xFF09;">1.5 &#x65B9;&#x6CD5;&#x533A;/&#x6C38;&#x4E45;&#x4EE3;&#xFF08;&#x7EBF;&#x7A0B;&#x5171;&#x4EAB;&#xFF09;</h6>
-<p>&#x7528;&#x4E8E;&#x5B58;&#x50A8;JVM&#x52A0;&#x8F7D;&#x7684;&#x7C7B;&#x4FE1;&#x606F;&#xFF0C;</p>
+                                <h1 id="springmvc">SpringMVC</h1>
+<h6 id="11-springmvc&#x6267;&#x884C;&#x6D41;&#x7A0B;">1.1 springMVC&#x6267;&#x884C;&#x6D41;&#x7A0B;</h6>
+<ul>
+<li>User&#x5411;&#x670D;&#x52A1;&#x5668;&#x53D1;&#x9001;request,&#x524D;&#x7AEF;&#x63A7;&#x5236;Servelt DispatcherServlet&#x6355;&#x83B7;;</li>
+<li>DispatcherServlet&#x5BF9;&#x8BF7;&#x6C42;URL&#x8FDB;&#x884C;&#x89E3;&#x6790;&#xFF0C;&#x8C03;&#x7528;HandlerMapping&#x83B7;&#x5F97;&#x8BE5;Handler&#x914D;&#x7F6E;&#x7684;&#x6240;&#x6709;&#x76F8;&#x5173;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x6700;&#x540E;&#x4EE5;HandlerExecutionChain&#x5BF9;&#x8C61;&#x7684;&#x5F62;&#x5F0F;&#x8FD4;&#x56DE;.</li>
+<li>DispatcherServlet &#x6839;&#x636E;&#x83B7;&#x5F97;&#x7684;Handler&#xFF0C;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x5408;&#x9002;&#x7684;HandlerAdapter.</li>
+<li>&#x63D0;&#x53D6;Request&#x4E2D;&#x7684;&#x6A21;&#x578B;&#x6570;&#x636E;&#xFF0C;&#x586B;&#x5145;Handler&#x5165;&#x53C2;&#xFF0C;&#x5F00;&#x59CB;&#x6267;&#x884C;Handler&#xFF08;Controller)</li>
+<li>Handler&#x6267;&#x884C;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;ModelAndView&#x5BF9;&#x8C61;&#x5230;DispatcherServlet</li>
+<li>&#x6839;&#x636E;&#x8FD4;&#x56DE;&#x7684;ModelAndView&#xFF0C;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x9002;&#x5408;&#x7684;ViewResolver</li>
+<li>ViewResolver &#x7ED3;&#x5408;Model&#x548C;View&#xFF0C;&#x6765;&#x6E32;&#x67D3;&#x89C6;&#x56FE;</li>
+<li>&#x5C06;&#x6E32;&#x67D3;&#x7ED3;&#x679C;&#x8FD4;&#x56DE;&#x7ED9;&#x5BA2;&#x6237;&#x7AEF;&#x3002;</li>
+</ul>
 
                                 
                                 </section>
@@ -529,12 +528,12 @@
 
             
                 
-                <a href="../JDK/BASE.html" class="navigation navigation-prev " aria-label="Previous page: java基础总结">
+                <a href="BASE.html" class="navigation navigation-prev " aria-label="Previous page: Spring总结">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../THREAD/BASE.html" class="navigation navigation-next " aria-label="Next page: 并发编程相关知识点">
+                <a href="../NIO/BASE.html" class="navigation navigation-next " aria-label="Next page: NIO">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -545,7 +544,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"JVM虚拟机","level":"1.3","depth":1,"next":{"title":"并发编程相关知识点","level":"1.4","depth":1,"path":"THREAD/BASE.md","ref":"THREAD/BASE.md","articles":[{"title":"jdk内置JUC组件","level":"1.4.1","depth":2,"path":"THREAD/JUC.md","ref":"THREAD/JUC.md","articles":[]},{"title":"guava框架","level":"1.4.2","depth":2,"path":"THREAD/GUVVA.md","ref":"THREAD/GUVVA.md","articles":[]},{"title":"Disruptor框架","level":"1.4.3","depth":2,"path":"THREAD/DISRUPTOR .md","ref":"THREAD/DISRUPTOR .md","articles":[]}]},"previous":{"title":"java基础总结","level":"1.2","depth":1,"path":"JDK/BASE.md","ref":"JDK/BASE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"JVM/BASE.md","mtime":"2019-07-30T10:10:14.894Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-31T09:01:35.169Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"SpringMVC","level":"1.7.1","depth":2,"next":{"title":"NIO","level":"1.8","depth":1,"path":"NIO/BASE.md","ref":"NIO/BASE.md","articles":[]},"previous":{"title":"Spring总结","level":"1.7","depth":1,"path":"SPRING/BASE.md","ref":"SPRING/BASE.md","articles":[{"title":"SpringMVC","level":"1.7.1","depth":2,"path":"SPRING/springMVC.md","ref":"SPRING/springMVC.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"SPRING/springMVC.md","mtime":"2019-08-31T09:00:08.479Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-31T09:01:35.169Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
