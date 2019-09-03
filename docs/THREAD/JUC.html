@@ -310,117 +310,6 @@
             
 
             
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../ALGORITHM/BUBBLE.html">
-            
-                <a href="../ALGORITHM/BUBBLE.html">
-            
-                    
-                        <b>1.9.1.</b>
-                    
-                    冒泡排序
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../ALGORITHM/HEAD.html">
-            
-                <a href="../ALGORITHM/HEAD.html">
-            
-                    
-                        <b>1.9.2.</b>
-                    
-                    堆排序
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="../ALGORITHM/INSERT.html">
-            
-                <a href="../ALGORITHM/INSERT.html">
-            
-                    
-                        <b>1.9.3.</b>
-                    
-                    插入排序
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="../ALGORITHM/MERGE.html">
-            
-                <a href="../ALGORITHM/MERGE.html">
-            
-                    
-                        <b>1.9.4.</b>
-                    
-                    归并排序
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.5" data-path="../ALGORITHM/QUICK.html">
-            
-                <a href="../ALGORITHM/QUICK.html">
-            
-                    
-                        <b>1.9.5.</b>
-                    
-                    快速排序
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.6" data-path="../ALGORITHM/SELECTION.html">
-            
-                <a href="../ALGORITHM/SELECTION.html">
-            
-                    
-                        <b>1.9.6.</b>
-                    
-                    选择排序
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.7" data-path="../ALGORITHM/SHEEL.html">
-            
-                <a href="../ALGORITHM/SHEEL.html">
-            
-                    
-                        <b>1.9.7.</b>
-                    
-                    希尔排序
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
         </li>
     
         <li class="chapter " data-level="1.10" data-path="../DESIGN/BASE.html">
@@ -601,7 +490,11 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="jdk&#x5185;&#x7F6E;juc&#x7EC4;&#x4EF6;">jdk&#x5185;&#x7F6E;JUC&#x7EC4;&#x4EF6;</h1>
-<h6 id="11-lock&#x76F8;&#x5173;&#x6982;&#x5FF5;">1.1 Lock&#x76F8;&#x5173;&#x6982;&#x5FF5;</h6>
+<h6 id="11-juc&#x6838;&#x5FC3;&#x7EC4;&#x4EF6;aqs">1.1 <a href="AQS.md">JUC&#x6838;&#x5FC3;&#x7EC4;&#x4EF6;AQS</a></h6>
+<p>AQS&#x662F;&#x7C7B;AbstractQueuedSynchronizer&#x7684;&#x7B80;&#x79F0;&#xFF08;&#x4EE5;&#x4E0B;&#x5747;&#x4EE5;AQS&#x4EE3;&#x66FF;&#xFF09;&#xFF0C;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x79CD;&#x5B9E;&#x73B0;&#x5835;&#x585E;&#x9501;&#xFF08;&#x72EC;&#x5360;&#x9501;&#xFF09;&#x548C;&#x4E00;&#x7CFB;&#x5217;FIFO&#x7B49;&#x5F85;&#x961F;&#x5217;&#xFF08;&#x5171;&#x4EAB;&#x9501;&#xFF09;&#x7684;&#x540C;&#x6B65;&#x6846;&#x67B6;&#x3002;
+&#x72EC;&#x5360;&#x9501;&#xFF1A;&#x6B64;&#x4EE3;&#x7801;&#x6709;&#x4E14;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x80FD;&#x591F;&#x6267;&#x884C;&#xFF0C;&#x5982;ReentrantLock
+&#x5171;&#x4EAB;&#x9501;&#xFF1A;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x53EF;&#x540C;&#x65F6;&#x83B7;&#x53D6;&#x9501;&#xFF0C;&#x5982;Semaphore/CountDownLatch</p>
+<h6 id="12-lock&#x76F8;&#x5173;&#x6982;&#x5FF5;">1.2 Lock&#x76F8;&#x5173;&#x6982;&#x5FF5;</h6>
 <p>Lock&#x4F5C;&#x7528;:</p>
 <ul>
 <li>&#x9501;&#x7528;&#x6765;&#x4FDD;&#x62A4;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#xFF0C;&#x4EFB;&#x4F55;&#x65F6;&#x523B;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x88AB;&#x4FDD;&#x62A4;&#x7684;&#x4EE3;&#x7801;&#x3002;</li>
@@ -610,7 +503,7 @@
 <li>&#x6BCF;&#x4E2A;&#x6761;&#x4EF6;&#x5BF9;&#x8C61;&#x7BA1;&#x7406;&#x90A3;&#x4E9B;&#x5DF2;&#x7ECF;&#x8FDB;&#x5165;&#x88AB;&#x4FDD;&#x62A4;&#x7684;&#x4EE3;&#x7801;&#x6BB5;&#x4F46;&#x8FD8;&#x4E0D;&#x80FD;&#x8FD0;&#x884C;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</li>
 </ul>
 <p>&#x516C;&#x5E73;&#x4E0E;&#x975E;&#x516C;&#x5E73;&#x9501;: &#x516C;&#x5E73;&#x9501;&#x8868;&#x793A;&#x7EBF;&#x7A0B;&#x83B7;&#x53D6;&#x9501;&#x7684;&#x987A;&#x5E8F;&#x662F;&#x6309;&#x7167;&#x7EBF;&#x7A0B;&#x52A0;&#x9501;&#x7684;&#x987A;&#x5E8F;&#x6765;&#x5206;&#x914D;&#x7684;&#xFF0C;&#x5373;&#x5148;&#x6765;&#x5148;&#x5F97;&#x7684;FIFO&#x5148;&#x8FDB;&#x5148;&#x51FA;&#x987A;&#x5E8F;&#x3002;&#x800C;&#x975E;&#x516C;&#x5E73;&#x9501;&#x662F;&#x4E00;&#x79CD;&#x83B7;&#x53D6;&#x9501;&#x7684;&#x62A2;&#x5360;&#x673A;&#x5236;&#xFF0C;&#x662F;&#x968F;&#x673A;&#x83B7;&#x5F97;&#x9501;&#x7684;&#xFF0C;&#x548C;&#x516C;&#x5E73;&#x9501;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x5C31;&#x662F;&#x5148;&#x6765;&#x7684;&#x4E0D;&#x4E00;&#x5B9A;&#x5148;&#x5F97;&#x5230;&#x9501;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x5F0F;&#x80AF;&#x5462;&#x8FC7;&#x9020;&#x6210;&#x67D0;&#x4E9B;&#x7EBF;&#x7A0B;&#x4E00;&#x76F4;&#x62FF;&#x4E0D;&#x5230;&#x9501;&#xFF0C;&#x7ED3;&#x679C;&#x4E5F;&#x5C31;&#x662F;&#x4E0D;&#x516C;&#x5E73;&#x7684;&#x4E86;&#x3002;</p>
-<h6 id="12-reentrantlock-&#x9ED8;&#x8BA4;&#x975E;&#x516C;&#x5E73;&#x9501;">1.2 ReentrantLock (&#x9ED8;&#x8BA4;&#x975E;&#x516C;&#x5E73;&#x9501;)</h6>
+<h6 id="121-reentrantlock-&#x9ED8;&#x8BA4;&#x975E;&#x516C;&#x5E73;&#x9501;">1.2.1 ReentrantLock (&#x9ED8;&#x8BA4;&#x975E;&#x516C;&#x5E73;&#x9501;)</h6>
 <p> &#x91CD;&#x5165;&#x9501;&#xFF08;ReentrantLock&#xFF09;&#x662F;&#x4E00;&#x79CD;&#x9012;&#x5F52;&#x65E0;&#x963B;&#x585E;&#x7684;&#x540C;&#x6B65;&#x673A;&#x5236;&#x3002; &#x5B83;&#x6709;&#x4E00;&#x4E2A;&#x4E0E;&#x9501;&#x76F8;&#x5173;&#x7684;&#x83B7;&#x53D6;&#x8BA1;&#x6570;&#x5668;&#xFF0C;&#x5982;&#x679C;&#x62E5;&#x6709;&#x9501;&#x7684;&#x67D0;&#x4E2A;&#x7EBF;&#x7A0B;&#x518D;&#x6B21;&#x5F97;&#x5230;&#x9501;&#xFF0C;&#x90A3;&#x4E48;&#x83B7;&#x53D6;&#x8BA1;&#x6570;&#x5668;&#x5C31;&#x52A0;1&#xFF0C;&#x7136;&#x540E;&#x9501;&#x9700;&#x8981;&#x88AB;&#x91CA;&#x653E;&#x4E24;&#x6B21;&#x624D;&#x80FD;&#x83B7;&#x5F97;&#x771F;&#x6B63;&#x91CA;&#x653E;&#x3002;&#x8FD9;&#x6A21;&#x4EFF;&#x4E86; synchronized &#x7684;&#x8BED;&#x4E49;&#xFF1B;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x8FDB;&#x5165;&#x7531;&#x7EBF;&#x7A0B;&#x5DF2;&#x7ECF;&#x62E5;&#x6709;&#x7684;&#x76D1;&#x63A7;&#x5668;&#x4FDD;&#x62A4;&#x7684; synchronized &#x5757;&#xFF0C;&#x5C31;&#x5141;&#x8BB8;&#x7EBF;&#x7A0B;&#x7EE7;&#x7EED;&#x8FDB;&#x884C;&#xFF0C;&#x5F53;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x7B2C;&#x4E8C;&#x4E2A;&#xFF08;&#x6216;&#x8005;&#x540E;&#x7EED;&#xFF09; synchronized &#x5757;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E0D;&#x91CA;&#x653E;&#x9501;&#xFF0C;&#x53EA;&#x6709;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x5B83;&#x8FDB;&#x5165;&#x7684;&#x76D1;&#x63A7;&#x5668;&#x4FDD;&#x62A4;&#x7684;&#x7B2C;&#x4E00;&#x4E2A; synchronized &#x5757;&#x65F6;&#xFF0C;&#x624D;&#x91CA;&#x653E;&#x9501;&#x3002;</p>
 <p>&#x5E38;&#x7528;&#x65B9;&#x6CD5;&#xFF1A;</p>
 <ul>
@@ -638,6 +531,9 @@
 </ul>
 </li>
 </ul>
+<h6 id="122-conditon">1.2.2 <a href="Condition.md">Conditon</a></h6>
+<p>Condition&#x4E3B;&#x8981;&#x662F;&#x7528;&#x6765;&#x5904;&#x7406;&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x4FE1;&#xFF0C;&#x5F53;&#x6EE1;&#x8DB3;&#x67D0;&#x4E00;&#x6761;&#x4EF6;&#x65F6;&#xFF0C;&#x5524;&#x9192;&#x5176;&#x4ED6;&#x7684;&#x7EBF;&#x7A0B;&#x3002;
+&#x4E3B;&#x8981;&#x914D;&#x5408;&#x91CD;&#x5165;&#x9501;&#x5B8C;&#x6210;&#x7B49;&#x5F85;&#x5524;&#x9192;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
 <h6 id="13-synchroized">1.3 synchroized</h6>
 <p>&#x76F8;&#x5173;&#x5B9A;&#x4E49;&#xFF1A;</p>
 <ul>
@@ -797,7 +693,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"jdk内置JUC组件","level":"1.4.1","depth":2,"next":{"title":"guava框架","level":"1.4.2","depth":2,"path":"THREAD/GUVVA.md","ref":"THREAD/GUVVA.md","articles":[]},"previous":{"title":"并发编程相关知识点","level":"1.4","depth":1,"path":"THREAD/BASE.md","ref":"THREAD/BASE.md","articles":[{"title":"jdk内置JUC组件","level":"1.4.1","depth":2,"path":"THREAD/JUC.md","ref":"THREAD/JUC.md","articles":[]},{"title":"guava框架","level":"1.4.2","depth":2,"path":"THREAD/GUVVA.md","ref":"THREAD/GUVVA.md","articles":[]},{"title":"Disruptor框架","level":"1.4.3","depth":2,"path":"THREAD/DISRUPTOR .md","ref":"THREAD/DISRUPTOR .md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"THREAD/JUC.md","mtime":"2019-07-29T15:16:02.709Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-03T06:10:32.655Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"jdk内置JUC组件","level":"1.4.1","depth":2,"next":{"title":"guava框架","level":"1.4.2","depth":2,"path":"THREAD/GUVVA.md","ref":"THREAD/GUVVA.md","articles":[]},"previous":{"title":"并发编程相关知识点","level":"1.4","depth":1,"path":"THREAD/BASE.md","ref":"THREAD/BASE.md","articles":[{"title":"jdk内置JUC组件","level":"1.4.1","depth":2,"path":"THREAD/JUC.md","ref":"THREAD/JUC.md","articles":[]},{"title":"guava框架","level":"1.4.2","depth":2,"path":"THREAD/GUVVA.md","ref":"THREAD/GUVVA.md","articles":[]},{"title":"Disruptor框架","level":"1.4.3","depth":2,"path":"THREAD/DISRUPTOR .md","ref":"THREAD/DISRUPTOR .md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"THREAD/JUC.md","mtime":"2019-09-03T06:43:42.694Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-03T06:59:32.325Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
