@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>servlet总结 · GitBook</title>
+        <title>快速排序 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -73,10 +73,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../SPRING/BASE.html" />
+    <link rel="next" href="SELECTION.html" />
     
     
-    <link rel="prev" href="../java8/BASE.html" />
+    <link rel="prev" href="MERGE.html" />
     
 
     </head>
@@ -282,9 +282,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.6" data-path="BASE.html">
+        <li class="chapter " data-level="1.6" data-path="../SERVLET/BASE.html">
             
-                <a href="BASE.html">
+                <a href="../SERVLET/BASE.html">
             
                     
                         <b>1.6.</b>
@@ -348,9 +348,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" data-path="../ALGORITHM/BASE.html">
+        <li class="chapter " data-level="1.9" data-path="BASE.html">
             
-                <a href="../ALGORITHM/BASE.html">
+                <a href="BASE.html">
             
                     
                         <b>1.9.</b>
@@ -364,9 +364,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.9.1" data-path="../ALGORITHM/BUBBLE.html">
+        <li class="chapter " data-level="1.9.1" data-path="BUBBLE.html">
             
-                <a href="../ALGORITHM/BUBBLE.html">
+                <a href="BUBBLE.html">
             
                     
                         <b>1.9.1.</b>
@@ -379,9 +379,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9.2" data-path="../ALGORITHM/HEAD.html">
+        <li class="chapter " data-level="1.9.2" data-path="HEAD.html">
             
-                <a href="../ALGORITHM/HEAD.html">
+                <a href="HEAD.html">
             
                     
                         <b>1.9.2.</b>
@@ -394,9 +394,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9.3" data-path="../ALGORITHM/INSERT.html">
+        <li class="chapter " data-level="1.9.3" data-path="INSERT.html">
             
-                <a href="../ALGORITHM/INSERT.html">
+                <a href="INSERT.html">
             
                     
                         <b>1.9.3.</b>
@@ -409,9 +409,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9.4" data-path="../ALGORITHM/MERGE.html">
+        <li class="chapter " data-level="1.9.4" data-path="MERGE.html">
             
-                <a href="../ALGORITHM/MERGE.html">
+                <a href="MERGE.html">
             
                     
                         <b>1.9.4.</b>
@@ -424,9 +424,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9.5" data-path="../ALGORITHM/QUICK.html">
+        <li class="chapter active" data-level="1.9.5" data-path="QUICK.html">
             
-                <a href="../ALGORITHM/QUICK.html">
+                <a href="QUICK.html">
             
                     
                         <b>1.9.5.</b>
@@ -439,9 +439,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9.6" data-path="../ALGORITHM/SELECTION.html">
+        <li class="chapter " data-level="1.9.6" data-path="SELECTION.html">
             
-                <a href="../ALGORITHM/SELECTION.html">
+                <a href="SELECTION.html">
             
                     
                         <b>1.9.6.</b>
@@ -454,9 +454,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9.7" data-path="../ALGORITHM/SHEEL.html">
+        <li class="chapter " data-level="1.9.7" data-path="SHEEL.html">
             
-                <a href="../ALGORITHM/SHEEL.html">
+                <a href="SHEEL.html">
             
                     
                         <b>1.9.7.</b>
@@ -672,7 +672,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >servlet总结</a>
+        <a href=".." >快速排序</a>
     </h1>
 </div>
 
@@ -687,7 +687,65 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="servlet&#x603B;&#x7ED3;">servlet&#x603B;&#x7ED3;</h1>
+                                <h1 id="&#x5FEB;&#x901F;&#x6392;&#x5E8F;">&#x5FEB;&#x901F;&#x6392;&#x5E8F;</h1>
+<pre><code class="lang-java"><span class="hljs-comment">/**
+ * &#x5FEB;&#x901F;&#x6392;&#x5E8F;&#xFF08;6  1  2 7  9  3  4  5 10  8&#xFF09;
+ * 1.&#x9009;&#x62E9;&#x57FA;&#x51C6;&#x503C;&#xFF0C;&#x6BD4;&#x5982;&#x9009;&#x7B2C;&#x4E00;&#x4E2A;6&#x4E3A;&#x57FA;&#x51C6;&#x503C;
+ * 2.&#x4ECE;i=1 &#x5F00;&#x59CB;&#x5411;&#x53F3;&#x5BFB;&#x627E;&#x7B2C;&#x4E00;&#x4E2A;&#x6BD4;6&#x5927;&#x7684;&#x6570;&#xFF0C;j&#x4ECE;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x503C;&#x5F80;&#x524D;&#x627E;&#xFF0C;&#x627E;&#x5230;&#x7B2C;&#x4E00;&#x4E2A;&#x6BD4;6&#x5C0F;&#x7684;&#x6570;&#xFF0C;&#x4EA4;&#x6362;i,j
+ * 3.i,j&#x7EE7;&#x7EED;&#x5F80;&#x524D;&#x8D70;&#xFF0C;&#x7EE7;&#x7EED;&#x505A;&#x7C7B;&#x4F3C;&#x7B2C;&#x4E8C;&#x6B65;&#x7684;&#x4EA4;&#x6362;
+ * 4.&#x77E5;&#x9053;i&#x548C;j&#x76F8;&#x9047;&#x4E86;&#xFF0C;&#x6216;&#x8005;i&gt;j&#x4E86;&#xFF0C;&#x5219;&#x505C;&#x6B62;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x57FA;&#x51C6;&#x503C;&#x5DE6;&#x8FB9;&#x90FD;&#x6BD4;&#x57FA;&#x51C6;&#x503C;&#x5C0F;&#xFF0C;&#x53F3;&#x8FB9;&#x90FD;&#x6BD4;&#x57FA;&#x51C6;&#x503C;&#x5927;
+ * 5.&#x6B64;&#x65F6;&#x57FA;&#x51C6;&#x503C;&#x4F4D;&#x4E8E;j&#x6240;&#x5904;&#x4F4D;&#x7F6E;&#xFF0C;&#x5C06;&#x5DF2;j&#x5206;&#x6210;&#x4E24;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x7EE7;&#x7EED;&#x8FDB;&#x884C;&#x6392;&#x5E8F;
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">QuickSort</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> array[], <span class="hljs-keyword">int</span> leftIndex, <span class="hljs-keyword">int</span> rightIndex)</span> </span>{
+        <span class="hljs-keyword">if</span> (leftIndex &gt;= rightIndex) {
+            <span class="hljs-keyword">return</span>;
+        }
+        <span class="hljs-keyword">int</span> partitionIndex = doSort(array, leftIndex, rightIndex);
+
+        sort(array, leftIndex, partitionIndex - <span class="hljs-number">1</span>);
+        sort(array, partitionIndex + <span class="hljs-number">1</span>, rightIndex);
+    }
+
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">doSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span> </span>{
+        <span class="hljs-keyword">int</span> pivot = getPivot(arr, start, end);
+        <span class="hljs-keyword">int</span> left_pointer = start - <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">int</span> right_pointer = end + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) {
+            <span class="hljs-comment">//left_pointer&#x5F53;&#x9047;&#x5230;&#x6BD4;&#x57FA;&#x51C6;&#x503C;&#x5927;&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x505C;&#x4E0B;&#x6765;</span>
+            <span class="hljs-keyword">while</span> (arr[++left_pointer] &lt; pivot) {
+            }
+            <span class="hljs-comment">//right_pointer&#x5F53;&#x9047;&#x5230;&#x6BD4;&#x57FA;&#x51C6;&#x503C;&#x5C0F;&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x505C;&#x4E0B;&#x6765;</span>
+            <span class="hljs-keyword">while</span> (arr[--right_pointer] &gt; pivot) {
+            }
+            <span class="hljs-keyword">if</span> (left_pointer &gt;= right_pointer) {
+                <span class="hljs-keyword">break</span>;
+            }
+            <span class="hljs-keyword">int</span> temp = arr[left_pointer];
+            arr[left_pointer] = arr[right_pointer];
+            arr[right_pointer] = temp;
+        }
+        <span class="hljs-keyword">return</span> right_pointer;
+    }
+
+    <span class="hljs-comment">/**
+     * &#x83B7;&#x53D6;&#x57FA;&#x51C6;&#x503C;
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getPivot</span><span class="hljs-params">(<span class="hljs-keyword">int</span> array[], <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span> </span>{
+        <span class="hljs-keyword">return</span> array[start];
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        <span class="hljs-comment">// int[] arr = {3,4,2,0,4,7,9,6,5,8};</span>
+        <span class="hljs-keyword">int</span>[] arr = {<span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">7</span>, <span class="hljs-number">2</span>, <span class="hljs-number">6</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>};
+        System.out.println(<span class="hljs-string">&quot;&#x6392;&#x5E8F;&#x524D;&#x6570;&#x7EC4;:&quot;</span> + Arrays.toString(arr));
+        sort(arr, <span class="hljs-number">0</span>, arr.length - <span class="hljs-number">1</span>);
+        System.out.println(<span class="hljs-string">&quot;&#x6392;&#x5E8F;&#x524D;&#x6570;&#x540E;:&quot;</span> + Arrays.toString(arr));
+        Arrays.sort(arr);
+    }
+}
+</code></pre>
 
                                 
                                 </section>
@@ -715,12 +773,12 @@
 
             
                 
-                <a href="../java8/BASE.html" class="navigation navigation-prev " aria-label="Previous page: java8新特性">
+                <a href="MERGE.html" class="navigation navigation-prev " aria-label="Previous page: 归并排序">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../SPRING/BASE.html" class="navigation navigation-next " aria-label="Next page: Spring总结">
+                <a href="SELECTION.html" class="navigation navigation-next " aria-label="Next page: 选择排序">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -731,7 +789,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"servlet总结","level":"1.6","depth":1,"next":{"title":"Spring总结","level":"1.7","depth":1,"path":"SPRING/BASE.md","ref":"SPRING/BASE.md","articles":[{"title":"SpringMVC","level":"1.7.1","depth":2,"path":"SPRING/springMVC.md","ref":"SPRING/springMVC.md","articles":[]}]},"previous":{"title":"java8新特性","level":"1.5","depth":1,"path":"java8/BASE.md","ref":"java8/BASE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"SERVLET/BASE.md","mtime":"2019-07-22T06:57:12.638Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-03T07:12:01.914Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"快速排序","level":"1.9.5","depth":2,"next":{"title":"选择排序","level":"1.9.6","depth":2,"path":"ALGORITHM/SELECTION.md","ref":"ALGORITHM/SELECTION.md","articles":[]},"previous":{"title":"归并排序","level":"1.9.4","depth":2,"path":"ALGORITHM/MERGE.md","ref":"ALGORITHM/MERGE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"ALGORITHM/QUICK.md","mtime":"2019-09-03T06:30:18.036Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-03T07:12:01.914Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

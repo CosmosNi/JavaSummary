@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>servlet总结 · GitBook</title>
+        <title>JUC之Condition源码 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -73,10 +73,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../SPRING/BASE.html" />
+    <link rel="next" href="GUVVA.html" />
     
     
-    <link rel="prev" href="../java8/BASE.html" />
+    <link rel="prev" href="ReentrantLock.html" />
     
 
     </head>
@@ -150,9 +150,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../THREAD/BASE.html">
+        <li class="chapter " data-level="1.4" data-path="BASE.html">
             
-                <a href="../THREAD/BASE.html">
+                <a href="BASE.html">
             
                     
                         <b>1.4.</b>
@@ -166,9 +166,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../THREAD/JUC.html">
+        <li class="chapter " data-level="1.4.1" data-path="JUC.html">
             
-                <a href="../THREAD/JUC.html">
+                <a href="JUC.html">
             
                     
                         <b>1.4.1.</b>
@@ -182,9 +182,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1.1" data-path="../THREAD/AQS.html">
+        <li class="chapter " data-level="1.4.1.1" data-path="AQS.html">
             
-                <a href="../THREAD/AQS.html">
+                <a href="AQS.html">
             
                     
                         <b>1.4.1.1.</b>
@@ -197,9 +197,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.2" data-path="../THREAD/ReentrantLock.html">
+        <li class="chapter " data-level="1.4.1.2" data-path="ReentrantLock.html">
             
-                <a href="../THREAD/ReentrantLock.html">
+                <a href="ReentrantLock.html">
             
                     
                         <b>1.4.1.2.</b>
@@ -212,9 +212,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.3" data-path="../THREAD/Condition.html">
+        <li class="chapter active" data-level="1.4.1.3" data-path="Condition.html">
             
-                <a href="../THREAD/Condition.html">
+                <a href="Condition.html">
             
                     
                         <b>1.4.1.3.</b>
@@ -232,9 +232,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="../THREAD/GUVVA.html">
+        <li class="chapter " data-level="1.4.2" data-path="GUVVA.html">
             
-                <a href="../THREAD/GUVVA.html">
+                <a href="GUVVA.html">
             
                     
                         <b>1.4.2.</b>
@@ -247,9 +247,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="../THREAD/DISRUPTOR .html">
+        <li class="chapter " data-level="1.4.3" data-path="DISRUPTOR .html">
             
-                <a href="../THREAD/DISRUPTOR .html">
+                <a href="DISRUPTOR .html">
             
                     
                         <b>1.4.3.</b>
@@ -282,9 +282,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.6" data-path="BASE.html">
+        <li class="chapter " data-level="1.6" data-path="../SERVLET/BASE.html">
             
-                <a href="BASE.html">
+                <a href="../SERVLET/BASE.html">
             
                     
                         <b>1.6.</b>
@@ -672,7 +672,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >servlet总结</a>
+        <a href=".." >JUC之Condition源码</a>
     </h1>
 </div>
 
@@ -687,7 +687,179 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="servlet&#x603B;&#x7ED3;">servlet&#x603B;&#x7ED3;</h1>
+                                <h2 id="&#x6E90;&#x7801;&#x89E3;&#x6790;&#xFF08;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#xFF09;">&#x6E90;&#x7801;&#x89E3;&#x6790;&#xFF08;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#xFF09;</h2>
+<ol>
+<li>await() 
+```java<pre><code> public final void await() throws InterruptedException {
+ // &#x7EBF;&#x7A0B;&#x88AB;&#x6253;&#x65AD;&#xFF0C;&#x629B;&#x51FA;&#x5F02;&#x5E38;
+     if (Thread.interrupted())
+         throw new InterruptedException();
+      //&#x5C06;&#x8282;&#x70B9;&#x52A0;&#x5165;&#x7B49;&#x5F85;&#x5E8F;&#x5217;
+     Node node = addConditionWaiter();
+     //&#x91CA;&#x653E;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6240;&#x5360;&#x7528;&#x7684;lock&#xFF0C;&#x5728;&#x91CA;&#x653E;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x4F1A;&#x5524;&#x9192;&#x540C;&#x6B65;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x4E0B;&#x4E00;&#x4E2A;&#x8282;&#x70B9;
+     // &#x6B64;&#x5904;&#x5F88;&#x597D;&#x7406;&#x89E3;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x91CA;&#x653E;&#x6240;&#x5360;&#x7528;&#x7684;&#x9501;&#xFF0C;&#x5219;&#x7531;&#x4E8E;condition&#x4F1A;&#x5835;&#x585E;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#xFF0C;&#x5BFC;&#x81F4;&#xFF0C;&#x5176;&#x4ED6;
+     //&#x7EBF;&#x7A0B;&#x6C38;&#x8FDC;&#x83B7;&#x53D6;&#x4E0D;&#x5230;&#x9501;&#xFF0C;&#x4E5F;&#x5C31;&#x5BFC;&#x81F4;&#x4E86;&#x6B7B;&#x9501;&#x3002;
+     int savedState = fullyRelease(node);
+     int interruptMode = 0;
+     //&#x81EA;&#x65CB;&#xFF0C;&#x68C0;&#x6D4B;&#x8282;&#x70B9;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x8FDB;&#x5165;&#x5835;&#x585E;&#x961F;&#x5217;
+     while (!isOnSyncQueue(node)) {
+        //&#x7EBF;&#x7A0B;&#x6302;&#x8D77;
+         LockSupport.park(this);
+         //&#x7EBF;&#x7A0B;&#x88AB;&#x6253;&#x65AD;&#x65F6;&#x9000;&#x51FA;&#x81EA;&#x65CB;
+         if ((interruptMode = checkInterruptWhileWaiting(node)) != 0)
+             break;
+     }
+     // &#x88AB;&#x5524;&#x9192;&#x540E;&#xFF0C;&#x5C06;&#x8FDB;&#x5165;&#x963B;&#x585E;&#x961F;&#x5217;&#xFF0C;&#x7B49;&#x5F85;&#x83B7;&#x53D6;&#x9501;,&#x5373;&#x91CD;&#x5165;&#x9501;&#x7684;lock
+     if (acquireQueued(node, savedState) &amp;&amp; interruptMode != THROW_IE)
+         interruptMode = REINTERRUPT;
+       //&#x540E;&#x7EED;&#x6CA1;&#x6709;&#x7B49;&#x5F85;&#x7684;&#x4E0B;&#x4E00;&#x8282;&#x70B9;&#xFF0C;&#x5219;&#x6E05;&#x9664;&#x8BE5;&#x8282;&#x70B9;
+     if (node.nextWaiter != null) // clean up if cancelled
+         unlinkCancelledWaiters();
+     if (interruptMode != 0)
+     //&#x7EBF;&#x7A0B;&#x4E2D;&#x65AD;&#x7684;&#x5904;&#x7406;
+         reportInterruptAfterWait(interruptMode);
+ }
+</code></pre></li>
+</ol>
+<pre><code>
+2. addConditionWaiter()
+```java
+        //&#x52A0;&#x5165;&#x7B49;&#x5F85;&#x961F;&#x5217;
+        private Node addConditionWaiter() {
+            //condition&#x961F;&#x5C3E;&#x5143;&#x7D20;
+            Node t = lastWaiter;
+            //&#x5982;&#x679C;&#x961F;&#x5C3E;&#x5143;&#x7D20;&#x5DF2;&#x7ECF;&#x9000;&#x51FA;&#xFF0C;&#x5219;&#x6E05;&#x9664;&#x961F;&#x5217;
+            if (t != null &amp;&amp; t.waitStatus != Node.CONDITION) {
+                //&#x6E05;&#x9664;&#x961F;&#x5217;
+                unlinkCancelledWaiters();
+                t = lastWaiter;
+            }
+            //&#x521B;&#x5EFA;condition&#x8282;&#x70B9;
+            Node node = new Node(Thread.currentThread(), Node.CONDITION);
+            //&#x5982;&#x679C;&#x961F;&#x5C3E;&#x5C3E;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x8BF4;&#x660E;&#x662F;&#x7A7A;&#x961F;&#x5217;
+            if (t == null)
+                //&#x5C06;&#x8282;&#x70B9;&#x7F6E;&#x4E3A;&#x5934;&#x7ED3;&#x70B9;
+                firstWaiter = node;
+            else
+                t.nextWaiter = node;
+             // &#x94FE;&#x63A5;&#x6210;&#x529F;&#xFF0C;&#x5C06;&#x5C3E;&#x8282;&#x70B9;&#x7F6E;&#x4E3A;&#x8BE5;&#x8282;&#x70B9;
+            lastWaiter = node;
+            return node;
+        }
+</code></pre><ol>
+<li><p>unlinkCancelledWaiters()</p>
+<pre><code class="lang-java"> <span class="hljs-comment">//&#x5C06;&#x5DF2;&#x53D6;&#x6D88;&#x7684;&#x6240;&#x6709;&#x8282;&#x70B9;&#x6E05;&#x9664;&#x51FA;&#x961F;&#x5217;</span>
+     <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">unlinkCancelledWaiters</span><span class="hljs-params">()</span> </span>{
+         Node t = firstWaiter;
+         Node trail = <span class="hljs-keyword">null</span>;
+         <span class="hljs-comment">// &#x4ECE;&#x5934;&#x7ED3;&#x70B9;&#x5F00;&#x59CB;&#x904D;&#x5386;&#xFF0C;</span>
+         <span class="hljs-keyword">while</span> (t != <span class="hljs-keyword">null</span>) {
+             Node next = t.nextWaiter;
+             <span class="hljs-comment">// &#x5982;&#x679C;&#x8282;&#x70B9;&#x7684;&#x72B6;&#x6001;&#x4E0D;&#x662F;CONDITION &#xFF0C;&#x5219;&#x8BF4;&#x660E;&#x8BE5;&#x8282;&#x70B9;&#x5DF2;&#x53D6;&#x6D88;</span>
+             <span class="hljs-keyword">if</span> (t.waitStatus != Node.CONDITION) {
+                 <span class="hljs-comment">//&#x65AD;&#x5F00;&#x8FDE;&#x63A5;</span>
+                 t.nextWaiter = <span class="hljs-keyword">null</span>;
+                 <span class="hljs-keyword">if</span> (trail == <span class="hljs-keyword">null</span>)
+                     <span class="hljs-comment">//&#x5C06;&#x4E0B;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x7F6E;&#x4E3A;&#x961F;&#x9996;</span>
+                     firstWaiter = next;
+                 <span class="hljs-keyword">else</span>
+                     trail.nextWaiter = next;
+                 <span class="hljs-keyword">if</span> (next == <span class="hljs-keyword">null</span>)
+                     lastWaiter = trail;
+             }
+             <span class="hljs-keyword">else</span>
+                 trail = t;
+             t = next;
+         }
+     }
+</code></pre>
+</li>
+<li><p>fullyRelease()</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fullyRelease</span><span class="hljs-params">(Node node)</span> </span>{
+     <span class="hljs-keyword">boolean</span> failed = <span class="hljs-keyword">true</span>;
+     <span class="hljs-keyword">try</span> {
+         <span class="hljs-comment">//&#x83B7;&#x53D6;&#x9501;&#x7684;&#x72B6;&#x6001;</span>
+         <span class="hljs-keyword">int</span> savedState = getState();
+         <span class="hljs-comment">//&#x91CA;&#x653E;&#x9501;&#xFF0C;&#x5373;&#x91CD;&#x5165;&#x9501;&#x7684;&#x91CA;&#x653E;&#xFF0C;&#x9501;&#x91CA;&#x653E;&#x5931;&#x8D25;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;</span>
+         <span class="hljs-keyword">if</span> (release(savedState)) {
+             failed = <span class="hljs-keyword">false</span>;
+             <span class="hljs-keyword">return</span> savedState;
+         } <span class="hljs-keyword">else</span> {
+             <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalMonitorStateException();
+         }
+     } <span class="hljs-keyword">finally</span> {
+       <span class="hljs-comment">//&#x91CA;&#x653E;&#x5931;&#x8D25;</span>
+         <span class="hljs-keyword">if</span> (failed)
+             node.waitStatus = Node.CANCELLED;
+     }
+ }
+</code></pre>
+</li>
+<li><p>isOnSyncQueue&#xFF08;&#xFF09;</p>
+</li>
+</ol>
+<pre><code class="lang-java">    <span class="hljs-comment">//&#x8282;&#x70B9;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x8F6C;&#x79FB;&#x5230;&#x963B;&#x585E;&#x961F;&#x5217;</span>
+    <span class="hljs-function"><span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isOnSyncQueue</span><span class="hljs-params">(Node node)</span> </span>{
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x5F53;&#x524D;&#x8282;&#x70B9;&#x7684;&#x72B6;&#x6001;&#x662F;CONDITION &#x6216;&#x8005;&#x6CA1;&#x6709;&#x524D;&#x7F6E;&#x8282;&#x70B9;&#xFF0C;&#x8BF4;&#x660E;&#x8FD8;&#x6CA1;&#x8FDB;&#x5165;&#x5835;&#x585E;&#x961F;&#x5217;</span>
+        <span class="hljs-keyword">if</span> (node.waitStatus == Node.CONDITION || node.prev == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+         <span class="hljs-comment">//&#x5982;&#x679C;&#x6709;&#x4E0B;&#x4E00;&#x8282;&#x70B9;&#x8BF4;&#x660E;&#x5DF2;&#x7ECF;&#x8FDB;&#x5165;&#x5835;&#x585E;&#x961F;&#x5217;</span>
+        <span class="hljs-keyword">if</span> (node.next != <span class="hljs-keyword">null</span>) <span class="hljs-comment">// If has successor, it must be on queue</span>
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+            <span class="hljs-comment">//&#x4ECE;&#x5C3E;&#x90E8;&#x8282;&#x70B9;&#x67E5;&#x627E;&#x8BE5;&#x8282;&#x70B9;</span>
+        <span class="hljs-keyword">return</span> findNodeFromTail(node);
+    }
+</code></pre>
+<h2 id="&#x6E90;&#x7801;&#x89E3;&#x6790;&#xFF08;&#x7EBF;&#x7A0B;&#x5524;&#x9192;&#xFF09;">&#x6E90;&#x7801;&#x89E3;&#x6790;&#xFF08;&#x7EBF;&#x7A0B;&#x5524;&#x9192;&#xFF09;</h2>
+<h3 id="&#x5524;&#x9192;&#x4E4B;signal">&#x5524;&#x9192;&#x4E4B;signal()</h3>
+<pre><code class="lang-java">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title">signal</span><span class="hljs-params">()</span> </span>{
+           <span class="hljs-comment">// &#x8C03;&#x7528; signal &#x65B9;&#x6CD5;&#x7684;&#x7EBF;&#x7A0B;&#x5FC5;&#x987B;&#x6301;&#x6709;&#x5F53;&#x524D;&#x7684;&#x72EC;&#x5360;&#x9501;</span>
+            <span class="hljs-keyword">if</span> (!isHeldExclusively())
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalMonitorStateException();
+             <span class="hljs-comment">// &#x627E;&#x5230;&#x5934;&#x7ED3;&#x70B9;</span>
+            Node first = firstWaiter;
+            <span class="hljs-keyword">if</span> (first != <span class="hljs-keyword">null</span>)
+                <span class="hljs-comment">//&#x5524;&#x9192;&#x5934;&#x7ED3;&#x70B9;</span>
+                doSignal(first);
+        }
+</code></pre>
+<ol>
+<li><pre><code class="lang-java"> <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doSignal</span><span class="hljs-params">(Node first)</span> </span>{
+             do {
+                 <span class="hljs-comment">//&#x81EA;&#x65CB;&#xFF0C;&#x4ECE;&#x5934;&#x7ED3;&#x70B9;&#x5F00;&#x59CB;&#x5BFB;&#x627E;&#x7B2C;&#x4E00;&#x4E2A;&#x80FD;&#x88AB;&#x5524;&#x9192;&#x7684;&#x8282;&#x70B9;</span>
+                 <span class="hljs-keyword">if</span> ( (firstWaiter = first.nextWaiter) == <span class="hljs-keyword">null</span>)
+                     lastWaiter = <span class="hljs-keyword">null</span>;
+                 first.nextWaiter = <span class="hljs-keyword">null</span>;
+             } <span class="hljs-keyword">while</span> (!transferForSignal(first) &amp;&amp;
+                      (first = firstWaiter) != <span class="hljs-keyword">null</span>);
+         }`
+</code></pre>
+</li>
+</ol>
+<h3 id="&#x5524;&#x9192;&#x4E4B;signalall">&#x5524;&#x9192;&#x4E4B;signalAll()</h3>
+<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title">signalAll</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">//&#x540C;&#x6837;&#x68C0;&#x6D4B;</span>
+        <span class="hljs-keyword">if</span> (!isHeldExclusively())
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalMonitorStateException();
+        Node first = firstWaiter;
+        <span class="hljs-keyword">if</span> (first != <span class="hljs-keyword">null</span>)
+            doSignalAll(first);
+    }
+</code></pre>
+<ol>
+<li>doSignalAll()</li>
+</ol>
+<pre><code class="lang-java">        <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doSignalAll</span><span class="hljs-params">(Node first)</span> </span>{
+            lastWaiter = firstWaiter = <span class="hljs-keyword">null</span>;
+            do {
+            <span class="hljs-comment">//&#x81EA;&#x65CB;&#xFF0C;&#x4ECE;&#x5934;&#x5230;&#x5C3E;&#xFF0C;&#x4F9D;&#x6B21;&#x5524;&#x9192;</span>
+                Node next = first.nextWaiter;
+                first.nextWaiter = <span class="hljs-keyword">null</span>;
+                transferForSignal(first);
+                first = next;
+            } <span class="hljs-keyword">while</span> (first != <span class="hljs-keyword">null</span>);
+        }
+</code></pre>
 
                                 
                                 </section>
@@ -715,12 +887,12 @@
 
             
                 
-                <a href="../java8/BASE.html" class="navigation navigation-prev " aria-label="Previous page: java8新特性">
+                <a href="ReentrantLock.html" class="navigation navigation-prev " aria-label="Previous page: JUC之ReentrantLock源码">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../SPRING/BASE.html" class="navigation navigation-next " aria-label="Next page: Spring总结">
+                <a href="GUVVA.html" class="navigation navigation-next " aria-label="Next page: guava框架">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -731,7 +903,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"servlet总结","level":"1.6","depth":1,"next":{"title":"Spring总结","level":"1.7","depth":1,"path":"SPRING/BASE.md","ref":"SPRING/BASE.md","articles":[{"title":"SpringMVC","level":"1.7.1","depth":2,"path":"SPRING/springMVC.md","ref":"SPRING/springMVC.md","articles":[]}]},"previous":{"title":"java8新特性","level":"1.5","depth":1,"path":"java8/BASE.md","ref":"java8/BASE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"SERVLET/BASE.md","mtime":"2019-07-22T06:57:12.638Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-03T07:12:01.914Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"JUC之Condition源码","level":"1.4.1.3","depth":3,"next":{"title":"guava框架","level":"1.4.2","depth":2,"path":"THREAD/GUVVA.md","ref":"THREAD/GUVVA.md","articles":[]},"previous":{"title":"JUC之ReentrantLock源码","level":"1.4.1.2","depth":3,"path":"THREAD/ReentrantLock.md","ref":"THREAD/ReentrantLock.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"THREAD/Condition.md","mtime":"2019-09-03T07:11:54.747Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-03T07:12:01.914Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

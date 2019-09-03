@@ -1,6 +1,6 @@
 # jdk内置JUC组件
 
-###### 1.1 [JUC核心组件AQS](AQS.md)
+###### 1.1 JUC核心组件AQS
 
 AQS是类AbstractQueuedSynchronizer的简称（以下均以AQS代替），提供了一种实现堵塞锁（独占锁）和一系列FIFO等待队列（共享锁）的同步框架。
 独占锁：此代码有且只有一个线程能够执行，如ReentrantLock
@@ -41,7 +41,7 @@ Lock作用:
     - 如果当前线程已经保持此锁，则将保持计数加 1，该方法将返回 true。
     - 如果锁被另一个线程保持，则此方法将立即返回 false 值。
 
-###### 1.2.2 [Conditon](Condition.md)
+###### 1.2.2 Conditon
 
 Condition主要是用来处理线程之间的通信，当满足某一条件时，唤醒其他的线程。
 主要配合重入锁完成等待唤醒的操作。

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>servlet总结 · GitBook</title>
+        <title>JUC之ReentrantLock源码 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -73,10 +73,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../SPRING/BASE.html" />
+    <link rel="next" href="Condition.html" />
     
     
-    <link rel="prev" href="../java8/BASE.html" />
+    <link rel="prev" href="AQS.html" />
     
 
     </head>
@@ -150,9 +150,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../THREAD/BASE.html">
+        <li class="chapter " data-level="1.4" data-path="BASE.html">
             
-                <a href="../THREAD/BASE.html">
+                <a href="BASE.html">
             
                     
                         <b>1.4.</b>
@@ -166,9 +166,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../THREAD/JUC.html">
+        <li class="chapter " data-level="1.4.1" data-path="JUC.html">
             
-                <a href="../THREAD/JUC.html">
+                <a href="JUC.html">
             
                     
                         <b>1.4.1.</b>
@@ -182,9 +182,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1.1" data-path="../THREAD/AQS.html">
+        <li class="chapter " data-level="1.4.1.1" data-path="AQS.html">
             
-                <a href="../THREAD/AQS.html">
+                <a href="AQS.html">
             
                     
                         <b>1.4.1.1.</b>
@@ -197,9 +197,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.2" data-path="../THREAD/ReentrantLock.html">
+        <li class="chapter active" data-level="1.4.1.2" data-path="ReentrantLock.html">
             
-                <a href="../THREAD/ReentrantLock.html">
+                <a href="ReentrantLock.html">
             
                     
                         <b>1.4.1.2.</b>
@@ -212,9 +212,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.1.3" data-path="../THREAD/Condition.html">
+        <li class="chapter " data-level="1.4.1.3" data-path="Condition.html">
             
-                <a href="../THREAD/Condition.html">
+                <a href="Condition.html">
             
                     
                         <b>1.4.1.3.</b>
@@ -232,9 +232,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="../THREAD/GUVVA.html">
+        <li class="chapter " data-level="1.4.2" data-path="GUVVA.html">
             
-                <a href="../THREAD/GUVVA.html">
+                <a href="GUVVA.html">
             
                     
                         <b>1.4.2.</b>
@@ -247,9 +247,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="../THREAD/DISRUPTOR .html">
+        <li class="chapter " data-level="1.4.3" data-path="DISRUPTOR .html">
             
-                <a href="../THREAD/DISRUPTOR .html">
+                <a href="DISRUPTOR .html">
             
                     
                         <b>1.4.3.</b>
@@ -282,9 +282,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.6" data-path="BASE.html">
+        <li class="chapter " data-level="1.6" data-path="../SERVLET/BASE.html">
             
-                <a href="BASE.html">
+                <a href="../SERVLET/BASE.html">
             
                     
                         <b>1.6.</b>
@@ -672,7 +672,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >servlet总结</a>
+        <a href=".." >JUC之ReentrantLock源码</a>
     </h1>
 </div>
 
@@ -687,7 +687,128 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="servlet&#x603B;&#x7ED3;">servlet&#x603B;&#x7ED3;</h1>
+                                <h1 id="juc&#x4E4B;&#x91CD;&#x5165;&#x9501;reentrantlock">JUC&#x4E4B;&#x91CD;&#x5165;&#x9501;ReentrantLock</h1>
+<h2 id="&#x6E90;&#x7801;&#x89E3;&#x6790;">&#x6E90;&#x7801;&#x89E3;&#x6790;</h2>
+<h3 id="lock">lock()</h3>
+<p>ReentrantLock&#x662F;&#x5728;AQS&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x5B9E;&#x73B0;&#x7684;&#x72EC;&#x5360;&#x9501;&#x3002;</p>
+<ol>
+<li>&#x5C1D;&#x8BD5;&#x52A0;&#x9501;</li>
+</ol>
+<pre><code class="lang-java">        <span class="hljs-function"><span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-comment">// &#x68C0;&#x6D4B;&#x9501;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x5982;&#x679C;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#xFF0C;&#x5219;&#x5C06;&#x5F53;&#x524D;&#x9501;&#x7684;&#x62E5;&#x6709;&#x8005;&#x8BBE;&#x7F6E;&#x4E3A;&#x4E3A;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;</span>
+            <span class="hljs-keyword">if</span> (compareAndSetState(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>))
+                setExclusiveOwnerThread(Thread.currentThread());
+            <span class="hljs-keyword">else</span>
+            <span class="hljs-comment">// &#x6B64;&#x5904;&#x903B;&#x8F91;&#x53EF;&#x53C2;&#x8003;&#x4E0A;&#x4E00;&#x7BC7;AQS&#x7684;&#x6587;&#x7AE0;</span>
+                acquire(<span class="hljs-number">1</span>);
+        }
+</code></pre>
+<ol>
+<li>&#x975E;&#x516C;&#x5E73;&#x9501;&#x65B9;&#x5F0F;&#x4E0B;&#x5C1D;&#x8BD5;&#x83B7;&#x53D6;&#x9501;</li>
+</ol>
+<pre><code class="lang-java">        <span class="hljs-function"><span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">nonfairTryAcquire</span><span class="hljs-params">(<span class="hljs-keyword">int</span> acquires)</span> </span>{
+            <span class="hljs-comment">//&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;</span>
+            <span class="hljs-keyword">final</span> Thread current = Thread.currentThread();
+            <span class="hljs-comment">// &#x83B7;&#x53D6;&#x5F53;&#x524D;&#x9501;&#x7684;&#x72B6;&#x6001;</span>
+            <span class="hljs-keyword">int</span> c = getState();
+            <span class="hljs-comment">//&#x5982;&#x679C;&#x72B6;&#x6001;&#x4E3A;0&#xFF0C;&#x8BF4;&#x660E;&#x5F53;&#x524D;&#x672A;&#x6709;&#x7EBF;&#x7A0B;&#x5360;&#x6709;&#x9501;</span>
+            <span class="hljs-keyword">if</span> (c == <span class="hljs-number">0</span>) {
+                <span class="hljs-comment">// CAS&#x64CD;&#x4F5C;&#xFF0C;</span>
+                <span class="hljs-keyword">if</span> (compareAndSetState(<span class="hljs-number">0</span>, acquires)) {
+                  <span class="hljs-comment">// &#x8BBE;&#x7F6E;&#x9501;&#x7684;&#x62E5;&#x6709;&#x7740;&#x4E3A;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;</span>
+                    setExclusiveOwnerThread(current);
+                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+                }
+            }
+            <span class="hljs-comment">//&#x91CD;&#x5165;&#x7684;&#x903B;&#x8F91;</span>
+            <span class="hljs-comment">// &#x540C;&#x4E00;&#x7EBF;&#x7A0B;&#x518D;&#x6B21;&#x83B7;&#x53D6;&#x9501;</span>
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (current == getExclusiveOwnerThread()) {
+                <span class="hljs-comment">// &#x5C06;&#x9501;&#x7684;&#x72B6;&#x6001;&#x589E;&#x52A0;1</span>
+                <span class="hljs-keyword">int</span> nextc = c + acquires;
+                <span class="hljs-keyword">if</span> (nextc &lt; <span class="hljs-number">0</span>) <span class="hljs-comment">// overflow</span>
+                    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(<span class="hljs-string">&quot;Maximum lock count exceeded&quot;</span>);
+                setState(nextc);
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        }
+</code></pre>
+<ol>
+<li>&#x9501;&#x7684;&#x91CA;&#x653E;</li>
+</ol>
+<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">release</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arg)</span> </span>{
+        <span class="hljs-comment">// &#x5C1D;&#x8BD5;&#x91CA;&#x653E;&#x9501;</span>
+        <span class="hljs-keyword">if</span> (tryRelease(arg)) {
+            Node h = head;
+            <span class="hljs-comment">// &#x5F53;&#x5934;&#x8282;&#x70B9;&#x4E0D;&#x4E3A;null&#x4EE5;&#x53CA;&#x8BE5;&#x8282;&#x70B9;&#x672A;&#x88AB;&#x53D6;&#x6D88;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5524;&#x9192;&#x7EBF;&#x7A0B;</span>
+            <span class="hljs-keyword">if</span> (h != <span class="hljs-keyword">null</span> &amp;&amp; h.waitStatus != <span class="hljs-number">0</span>)
+                <span class="hljs-comment">//&#x7EBF;&#x7A0B;&#x5524;&#x9192;</span>
+                unparkSuccessor(h);
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
+</code></pre>
+<ol>
+<li>&#x5177;&#x4F53;&#x7684;&#x91CA;&#x653E;&#x903B;&#x8F91;</li>
+</ol>
+<pre><code class="lang-java">        <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryRelease</span><span class="hljs-params">(<span class="hljs-keyword">int</span> releases)</span> </span>{
+            <span class="hljs-comment">//&#x5C06;&#x5F53;&#x524D;&#x9501;&#x7684;&#x72B6;&#x6001;&#x51CF;1</span>
+            <span class="hljs-keyword">int</span> c = getState() - releases;
+            <span class="hljs-comment">//&#x5982;&#x679C;&#x5360;&#x6709;&#x9501;&#x7684;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x4E0D;&#x662F;&#x8BE5;&#x7EBF;&#x7A0B;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;</span>
+            <span class="hljs-keyword">if</span> (Thread.currentThread() != getExclusiveOwnerThread())
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalMonitorStateException();
+            <span class="hljs-keyword">boolean</span> free = <span class="hljs-keyword">false</span>;
+            <span class="hljs-comment">// &#x9501;&#x7684;&#x5F53;&#x524D;&#x72B6;&#x6001;&#x4E3A;0&#xFF0C;&#x5373;&#x9501;&#x91CA;&#x653E;&#x5B8C;&#x6210;&#xFF08;&#x8003;&#x8651;&#x540C;&#x4E00;&#x6839;&#x7EBF;&#x7A0B;&#x52A0;&#x9501;&#x4E24;&#x6B21;&#xFF0C;&#x9700;&#x8981;&#x91CA;&#x653E;&#x4E24;&#x6B21;&#xFF09;</span>
+            <span class="hljs-keyword">if</span> (c == <span class="hljs-number">0</span>) {
+                free = <span class="hljs-keyword">true</span>;
+                setExclusiveOwnerThread(<span class="hljs-keyword">null</span>);
+            }
+            <span class="hljs-comment">//&#x8BBE;&#x7F6E;&#x9501;&#x7684;&#x72B6;&#x6001;</span>
+            setState(c);
+            <span class="hljs-keyword">return</span> free;
+        }
+</code></pre>
+<ol>
+<li>&#x516C;&#x5E73;&#x9501;&#x4E0E;&#x975E;&#x516C;&#x5E73;&#x9501;&#x7684;&#x533A;&#x522B;</li>
+</ol>
+<pre><code class="lang-java">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasQueuedPredecessors</span><span class="hljs-params">()</span> </span>{
+        Node t = tail; 
+        Node h = head;
+        Node s;
+        <span class="hljs-comment">// &#x901A;&#x8FC7;&#x5224;&#x65AD;&quot;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&quot;&#x662F;&#x4E0D;&#x662F;&#x5728;CLH&#x961F;&#x5217;&#x7684;&#x961F;&#x9996;&#xFF0C;&#x6765;&#x8FD4;&#x56DE;AQS&#x4E2D;&#x662F;&#x4E0D;&#x662F;&#x6709;&#x6BD4;&#x201C;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x201D;&#x7B49;&#x5F85;&#x66F4;&#x4E45;&#x7684;&#x7EBF;&#x7A0B;</span>
+        <span class="hljs-keyword">return</span> h != t &amp;&amp;
+            ((s = h.next) == <span class="hljs-keyword">null</span> || s.thread != Thread.currentThread());
+    }
+</code></pre>
+<h3 id="lockinterruptibly">lockInterruptibly()</h3>
+<p>&#x4E0E;lock&#x7684;&#x533A;&#x522B;&#x5728;&#x4E0E;&#x5982;&#x4E0B;&#x65B9;&#x6CD5;</p>
+<pre><code class="lang-java"> <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doAcquireInterruptibly</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arg)</span>
+        <span class="hljs-keyword">throws</span> InterruptedException </span>{
+        <span class="hljs-keyword">final</span> Node node = addWaiter(Node.EXCLUSIVE);
+        <span class="hljs-keyword">boolean</span> failed = <span class="hljs-keyword">true</span>;
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-keyword">for</span> (;;) {
+                <span class="hljs-keyword">final</span> Node p = node.predecessor();
+                <span class="hljs-keyword">if</span> (p == head &amp;&amp; tryAcquire(arg)) {
+                    setHead(node);
+                    p.next = <span class="hljs-keyword">null</span>; <span class="hljs-comment">// help GC</span>
+                    failed = <span class="hljs-keyword">false</span>;
+                    <span class="hljs-keyword">return</span>;
+                }
+                <span class="hljs-comment">//  &#x6B64;&#x5904;&#xFF0C;lock&#x53EA;&#x662F;&#x8FD4;&#x56DE;&#x4E2D;&#x65AD;&#x72B6;&#x6001;&#xFF0C;&#x800C;lockInterruptibly&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;</span>
+                <span class="hljs-keyword">if</span> (shouldParkAfterFailedAcquire(p, node) &amp;&amp;
+                    parkAndCheckInterrupt())
+                    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InterruptedException();
+            }
+        } <span class="hljs-keyword">finally</span> {
+            <span class="hljs-keyword">if</span> (failed)
+                cancelAcquire(node);
+        }
+    }
+</code></pre>
+<h3 id="trylock">tryLock</h3>
+<p>&#x4E0E;lock&#x7684;&#x533A;&#x522B;&#x5728;&#x4E8E;&#x5728;&#x672A;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5E76;&#x672A;&#x8FDB;&#x884C;&#x5165;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x800C;&#x662F;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x3002;</p>
 
                                 
                                 </section>
@@ -715,12 +836,12 @@
 
             
                 
-                <a href="../java8/BASE.html" class="navigation navigation-prev " aria-label="Previous page: java8新特性">
+                <a href="AQS.html" class="navigation navigation-prev " aria-label="Previous page: JUC之AQS源码">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../SPRING/BASE.html" class="navigation navigation-next " aria-label="Next page: Spring总结">
+                <a href="Condition.html" class="navigation navigation-next " aria-label="Next page: JUC之Condition源码">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -731,7 +852,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"servlet总结","level":"1.6","depth":1,"next":{"title":"Spring总结","level":"1.7","depth":1,"path":"SPRING/BASE.md","ref":"SPRING/BASE.md","articles":[{"title":"SpringMVC","level":"1.7.1","depth":2,"path":"SPRING/springMVC.md","ref":"SPRING/springMVC.md","articles":[]}]},"previous":{"title":"java8新特性","level":"1.5","depth":1,"path":"java8/BASE.md","ref":"java8/BASE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"SERVLET/BASE.md","mtime":"2019-07-22T06:57:12.638Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-03T07:12:01.914Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"JUC之ReentrantLock源码","level":"1.4.1.2","depth":3,"next":{"title":"JUC之Condition源码","level":"1.4.1.3","depth":3,"path":"THREAD/Condition.md","ref":"THREAD/Condition.md","articles":[]},"previous":{"title":"JUC之AQS源码","level":"1.4.1.1","depth":3,"path":"THREAD/AQS.md","ref":"THREAD/AQS.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"THREAD/ReentrantLock.md","mtime":"2019-09-03T06:41:54.485Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-03T07:12:01.914Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
