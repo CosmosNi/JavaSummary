@@ -2,6 +2,7 @@
 
 * [前言](README.md)
 * [java基础总结](JDK/BASE.md)
+    * [HashMap源码解析](JDK/hashMap.md)
 * [JVM虚拟机](JVM/BASE.md)
 * [并发编程相关知识点](THREAD/BASE.md)
     * [jdk内置JUC组件](THREAD/JUC.md)
@@ -26,6 +27,7 @@
 * [设计模式](DESIGN/BASE.md)
     * [单例模式](DESIGN/Singleton.md)
     * [策略模式](DESIGN/Strategy.md)
+    * [代理模式](DESIGN/proxy.md)
 * [分布式](DISTRIBUTED/BASE.md)
     * [分布式事务](DISTRIBUTED/ACID.md)
     * [Zookeeper](DISTRIBUTED/zk.md)

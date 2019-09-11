@@ -1,3 +1,7 @@
+---
+typora-copy-images-to: ..\image
+---
+
 # jdk内置JUC组件
 
 ###### 1.1 JUC核心组件AQS
@@ -90,13 +94,29 @@ volatile和synchronized比较
 
 
 
-###### 1.5 ThreadLocal
+###### 1.5 ThreadLocal（InheritableThreadLocal 提供父子线程变量共享）
 
 Threadlocal提供了get和set的访问器，为每个使用它的线程维护一份单独的拷贝。所以get返回的都是当前线程设置的最新值。
 
 ThreadLocal在内部维护了一个ThreadMap用来映射线程的独有变量。
 
+- 一个Thread有且仅有一个ThreadLocalMap对象
+- 一个Entry对象的key弱引用指向一个ThreadLocal对象。
+- 一个ThreadLocalMap对象可以被多个线程所共享。
+- ThreadLocal对象不持有Value，Value由线程的Entry对象持有。
 
+
+
+ThreadLocal的弊端：
+
+- 脏数据：线程复用会产生脏数据。由于线程池会重用Thread对象，那么和Thead绑定的静态属性ThreadLocal变量也会被重用。
+- 内存泄露：在源码注释中提示使用static关键字来修饰ThreadLocal。在此场景下，寄希望于TheadLocal对象失去引用后，触发弱引用机制来回收Entry的Value就不现实了。
+
+解决方案即在每次用完ThreadLocal时，必须及时调用remove（）方法进行清理
+
+
+
+![1568192027802](../image/1568192027802.png)
 
 ###### 1.6 Future+callable
 
@@ -178,7 +198,7 @@ CompletableFuture:
 - maximumPoolSize：指定了线程池中的最大线程数量。
 - keepAliveTime：当线程池线程数量超过corePoolSize，多余的空闲线程的存活时间，即超过corePoolSizde的空闲线程，在多长时间内会被销毁。
 - unit：keepAliveTime的单位
-- workQueue：任务队列，被提交但未被执行的任务。
+- workQueue：任务队列，被提交但未被执行的任务。当请求的线程数大于maximumPoolSize时，线程进入BlockingQueue阻塞队列。
 - threadFactory:线程工厂，用于创建线程，一般用默认的既可
 - handler：拒绝策略。当任务太多来不及处理，如何拒绝任务。
 
@@ -196,4 +216,167 @@ workQueue说明： 是一个BlockingQueue接口对象。仅用于存放Runnable�
 - DiscardOldestPolicy：该策略将丢弃最老的一个请求，也就是即将被执行的一个任务，并尝试再次提交当前任务。
 - DiscardPolicy：该策略默默丢弃无法处理的任务，不予任何处理。
 
-扩展：ThreadPoolExecutor提供了beforeExecute(),afterExecute和terminated()三个方法用来对线程池进行控制
+扩展：ThreadPoolExecutor提供了beforeExecute(),afterExecute和terminated()三个方法用来对线程池进行控制。
+
+
+
+线程池使用注意点：
+
+- 合理设置各类参数，应根据实际业务场景来设置合理的工作线程数
+- 线程资源必须通过线程池提供，不允许在应用中自行显式创建线程
+- 创建线程或线程池时请指定有意义的线程名称，方便出错时回溯。
+
+
+
+ThreadPoolExecutor源码：
+
+```java
+	//Integer共有32位，最右边29位表示工作线程数，最左边三位标识线程池状态。即，3个二进制可以表示从0至7的8个不同数值
+    private static final int COUNT_BITS = Integer.SIZE - 3;
+    private static final int CAPACITY   = (1 << COUNT_BITS) - 1;
+
+    //此状态表示线程池能接受新任务
+    private static final int RUNNING    = -1 << COUNT_BITS;
+	//此状态不再接受新任务，但可以继续执行队列中的任务
+    private static final int SHUTDOWN   =  0 << COUNT_BITS;
+	//此状态全面拒绝，并中断正在处理的任务
+    private static final int STOP       =  1 << COUNT_BITS;
+	//此状态表示所有任务已经被终止
+    private static final int TIDYING    =  2 << COUNT_BITS;
+	//此状态表示已清理完现场
+    private static final int TERMINATED =  3 << COUNT_BITS;
+
+    // Packing and unpacking ctl
+	//表示线程池当前处于stop状态
+    private static int runStateOf(int c)     { return c & ~CAPACITY; }
+	//工作线程数
+    private static int workerCountOf(int c)  { return c & CAPACITY; }
+    private static int ctlOf(int rs, int wc) { return rs | wc; }
+```
+
+```java
+public void execute(Runnable command) {
+        if (command == null)
+            throw new NullPointerException();
+    	//返回包含线程数以及线程池状态的Integer类型数值
+        int c = ctl.get();
+    	//如果工作线程数小于核心线程数，则创建线程任务并执行
+        if (workerCountOf(c) < corePoolSize) {
+            //重要方法
+            if (addWorker(command, true))
+                return;
+            //如果创建失败，防止外部已经在线程池中加入新任务，重新获取下
+            c = ctl.get();
+        }
+    	//只有线程池处于RUNNING状态，才执行后半句：置入队列
+        if (isRunning(c) && workQueue.offer(command)) {
+            int recheck = ctl.get();
+            //如果线程池不是Running状态，则将刚加入队列的任务移除
+            if (! isRunning(recheck) && remove(command))
+                reject(command);
+            //如果之前的线程已被消费完，新建一个线程
+            else if (workerCountOf(recheck) == 0)
+                addWorker(null, false);
+        }
+    	//核心池和队列都已满，尝试创建一个新线程
+        else if (!addWorker(command, false))
+            //如果addWorker返回的是false，即创建失败，则唤醒拒绝策略
+            reject(command);
+    }
+```
+
+```java
+/**
+ * 根据当前线程池状态，检查是否可以添加新的任务线程，如果可以则创建并
+ * 启动任务，如果一切正常则返回true，返回false的可能性如下：
+ * 1. 线程池没有处于RUNNING状态
+ * 2. 线程工厂创建新的任务线程失败。
+ *
+ * firstTask：外部启动线程池时需要构造的第一个线程，它是线程的母体
+ * core：新增工作线程时的判断指标，解释如下
+ *      true：表示新增工作线程时，需要判断当前RUNNING状态的线程是否少于corePoolSize
+ *      false：表示新增工作线程时，需要判断当前RUNNING状态的线程是否少于maximumPoolSize
+ */
+private boolean addWorker(Runnable firstTask, boolean core) {
+        retry:
+        for (;;) {
+            int c = ctl.get();
+            int rs = runStateOf(c);
+
+            // Check if queue empty only if necessary.
+            //如果RUNNING状态，则条件为假，不执行后面的判断
+            //如果时STOP及之上的状态，或者firstTask初始线程不为空，或者队列为空
+            //都会直接返回创建失败
+            if (rs >= SHUTDOWN &&
+                ! (rs == SHUTDOWN &&
+                   firstTask == null &&
+                   ! workQueue.isEmpty()))
+                return false;
+
+            for (;;) {
+                int wc = workerCountOf(c);
+                //如果超过最大允许线程数则不能再添加新的线程
+                //最大线程数不能超过2^29，否则会影响左边3位的线程池状态值
+                if (wc >= CAPACITY ||
+                    wc >= (core ? corePoolSize : maximumPoolSize))
+                    return false;
+                //当前活动线程数+1
+                if (compareAndIncrementWorkerCount(c))
+                    break retry;
+                //线程池状态和工作线程数是可变的，需要经常提取这个最新值
+                c = ctl.get();  // Re-read ctl
+                //如果已经关闭，则再次从rerty标签处进入
+                if (runStateOf(c) != rs)
+                    continue retry;
+                // else CAS failed due to workerCount change; retry inner loop
+            }
+        }
+		//开始创建工作线程
+        boolean workerStarted = false;
+        boolean workerAdded = false;
+        Worker w = null;
+        try {
+            //利用Worker构造方法中的线程池工厂创建线程，并封装成工作线程Worker对象
+            w = new Worker(firstTask);
+            //注意这是Worker中的属性对象thread
+            final Thread t = w.thread;
+            if (t != null) {
+                //在进行ThreadPoolExecutor的敏感操作时
+                //都需要持有主锁，避免在添加和启动线程时被干扰
+                final ReentrantLock mainLock = this.mainLock;
+                mainLock.lock();
+                try {
+                    // Recheck while holding lock.
+                    // Back out on ThreadFactory failure or if
+                    // shut down before lock acquired.
+                    int rs = runStateOf(ctl.get());
+
+                    if (rs < SHUTDOWN ||
+                        (rs == SHUTDOWN && firstTask == null)) {
+                        if (t.isAlive()) // precheck that t is startable
+                            throw new IllegalThreadStateException();
+                        workers.add(w);
+                        int s = workers.size();
+                        //整个线程池在运行期间的最大并发任务个数
+                        if (s > largestPoolSize)
+                            largestPoolSize = s;
+                        workerAdded = true;
+                    }
+                } finally {
+                    mainLock.unlock();
+                }
+                if (workerAdded) {
+                    //注意，并非线程池的execute的command参数指向的线程
+                    t.start();
+                    workerStarted = true;
+                }
+            }
+        } finally {
+            if (! workerStarted)
+                //线程启动失败，将工作线程计数再减回去
+                addWorkerFailed(w);
+        }
+        return workerStarted;
+    }
+```
+

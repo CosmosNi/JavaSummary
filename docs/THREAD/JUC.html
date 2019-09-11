@@ -133,6 +133,27 @@
             
 
             
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../JDK/hashMap.html">
+            
+                <a href="../JDK/hashMap.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    HashMap源码解析
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
         </li>
     
         <li class="chapter " data-level="1.3" data-path="../JVM/BASE.html">
@@ -520,6 +541,21 @@
             
         </li>
     
+        <li class="chapter " data-level="1.10.3" data-path="../DESIGN/proxy.html">
+            
+                <a href="../DESIGN/proxy.html">
+            
+                    
+                        <b>1.10.3.</b>
+                    
+                    代理模式
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -784,9 +820,22 @@
 <li>volatile&#x53EA;&#x80FD;&#x4FDD;&#x8BC1;&#x6570;&#x636E;&#x7684;&#x53EF;&#x89C1;&#x6027;&#xFF0C;&#x4F46;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x539F;&#x5B50;&#x6027;&#xFF1B;&#x800C;synchronized&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x539F;&#x5B50;&#x6027;&#xFF0C;&#x4E5F;&#x53EF;&#x95F4;&#x63A5;&#x4FDD;&#x8BC1;&#x53EF;&#x89C1;&#x6027;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4F1A;&#x5C06;&#x79C1;&#x6709;&#x5185;&#x5B58;&#x548C;&#x516C;&#x5171;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x505A;&#x540C;&#x6B65;</li>
 <li>volatile&#x89E3;&#x51B3;&#x7684;&#x662F;&#x53D8;&#x91CF;&#x5728;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x7684;&#x53EF;&#x89C1;&#x6027;&#xFF0C;&#x800C;synchronized&#x89E3;&#x51B3;&#x7684;&#x662F;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x8BBF;&#x95EE;&#x8D44;&#x6E90;&#x7684;&#x540C;&#x6B65;&#x6027;&#x3002;</li>
 </ol>
-<h6 id="15-threadlocal">1.5 ThreadLocal</h6>
+<h6 id="15-threadlocal&#xFF08;inheritablethreadlocal-&#x63D0;&#x4F9B;&#x7236;&#x5B50;&#x7EBF;&#x7A0B;&#x53D8;&#x91CF;&#x5171;&#x4EAB;&#xFF09;">1.5 ThreadLocal&#xFF08;InheritableThreadLocal &#x63D0;&#x4F9B;&#x7236;&#x5B50;&#x7EBF;&#x7A0B;&#x53D8;&#x91CF;&#x5171;&#x4EAB;&#xFF09;</h6>
 <p>Threadlocal&#x63D0;&#x4F9B;&#x4E86;get&#x548C;set&#x7684;&#x8BBF;&#x95EE;&#x5668;&#xFF0C;&#x4E3A;&#x6BCF;&#x4E2A;&#x4F7F;&#x7528;&#x5B83;&#x7684;&#x7EBF;&#x7A0B;&#x7EF4;&#x62A4;&#x4E00;&#x4EFD;&#x5355;&#x72EC;&#x7684;&#x62F7;&#x8D1D;&#x3002;&#x6240;&#x4EE5;get&#x8FD4;&#x56DE;&#x7684;&#x90FD;&#x662F;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x8BBE;&#x7F6E;&#x7684;&#x6700;&#x65B0;&#x503C;&#x3002;</p>
 <p>ThreadLocal&#x5728;&#x5185;&#x90E8;&#x7EF4;&#x62A4;&#x4E86;&#x4E00;&#x4E2A;ThreadMap&#x7528;&#x6765;&#x6620;&#x5C04;&#x7EBF;&#x7A0B;&#x7684;&#x72EC;&#x6709;&#x53D8;&#x91CF;&#x3002;</p>
+<ul>
+<li>&#x4E00;&#x4E2A;Thread&#x6709;&#x4E14;&#x4EC5;&#x6709;&#x4E00;&#x4E2A;ThreadLocalMap&#x5BF9;&#x8C61;</li>
+<li>&#x4E00;&#x4E2A;Entry&#x5BF9;&#x8C61;&#x7684;key&#x5F31;&#x5F15;&#x7528;&#x6307;&#x5411;&#x4E00;&#x4E2A;ThreadLocal&#x5BF9;&#x8C61;&#x3002;</li>
+<li>&#x4E00;&#x4E2A;ThreadLocalMap&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x88AB;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x6240;&#x5171;&#x4EAB;&#x3002;</li>
+<li>ThreadLocal&#x5BF9;&#x8C61;&#x4E0D;&#x6301;&#x6709;Value&#xFF0C;Value&#x7531;&#x7EBF;&#x7A0B;&#x7684;Entry&#x5BF9;&#x8C61;&#x6301;&#x6709;&#x3002;</li>
+</ul>
+<p>ThreadLocal&#x7684;&#x5F0A;&#x7AEF;&#xFF1A;</p>
+<ul>
+<li>&#x810F;&#x6570;&#x636E;&#xFF1A;&#x7EBF;&#x7A0B;&#x590D;&#x7528;&#x4F1A;&#x4EA7;&#x751F;&#x810F;&#x6570;&#x636E;&#x3002;&#x7531;&#x4E8E;&#x7EBF;&#x7A0B;&#x6C60;&#x4F1A;&#x91CD;&#x7528;Thread&#x5BF9;&#x8C61;&#xFF0C;&#x90A3;&#x4E48;&#x548C;Thead&#x7ED1;&#x5B9A;&#x7684;&#x9759;&#x6001;&#x5C5E;&#x6027;ThreadLocal&#x53D8;&#x91CF;&#x4E5F;&#x4F1A;&#x88AB;&#x91CD;&#x7528;&#x3002;</li>
+<li>&#x5185;&#x5B58;&#x6CC4;&#x9732;&#xFF1A;&#x5728;&#x6E90;&#x7801;&#x6CE8;&#x91CA;&#x4E2D;&#x63D0;&#x793A;&#x4F7F;&#x7528;static&#x5173;&#x952E;&#x5B57;&#x6765;&#x4FEE;&#x9970;ThreadLocal&#x3002;&#x5728;&#x6B64;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x5BC4;&#x5E0C;&#x671B;&#x4E8E;TheadLocal&#x5BF9;&#x8C61;&#x5931;&#x53BB;&#x5F15;&#x7528;&#x540E;&#xFF0C;&#x89E6;&#x53D1;&#x5F31;&#x5F15;&#x7528;&#x673A;&#x5236;&#x6765;&#x56DE;&#x6536;Entry&#x7684;Value&#x5C31;&#x4E0D;&#x73B0;&#x5B9E;&#x4E86;&#x3002;</li>
+</ul>
+<p>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x5373;&#x5728;&#x6BCF;&#x6B21;&#x7528;&#x5B8C;ThreadLocal&#x65F6;&#xFF0C;&#x5FC5;&#x987B;&#x53CA;&#x65F6;&#x8C03;&#x7528;remove&#xFF08;&#xFF09;&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x6E05;&#x7406;</p>
+<p><img src="../image/1568192027802.png" alt="1568192027802"></p>
 <h6 id="16-futurecallable">1.6 Future+callable</h6>
 <p>&#x6240;&#x8C13;&#x5F02;&#x6B65;&#x8C03;&#x7528;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x53EF;&#x65E0;&#x9700;&#x7B49;&#x5F85;&#x88AB;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x800C;&#x8BA9;&#x64CD;&#x4F5C;&#x7EE7;&#x7EED;&#x8FD0;&#x884C;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x5728; Java &#x8BED;&#x8A00;&#x4E2D;&#xFF0C;&#x7B80;&#x5355;&#x7684;&#x8BB2;&#x5C31;&#x662F;&#x53E6;&#x542F;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6765;&#x5B8C;&#x6210;&#x8C03;&#x7528;&#x4E2D;&#x7684;&#x90E8;&#x5206;&#x8BA1;&#x7B97;&#xFF0C;&#x4F7F;&#x8C03;&#x7528;&#x7EE7;&#x7EED;&#x8FD0;&#x884C;&#x6216;&#x8FD4;&#x56DE;&#xFF0C;&#x800C;&#x4E0D;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;&#x3002;&#x4F46;&#x8C03;&#x7528;&#x8005;&#x4ECD;&#x9700;&#x8981;&#x53D6;&#x7EBF;&#x7A0B;&#x7684;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;&#x3002;</p>
 <p>CompletableFuture:</p>
@@ -844,7 +893,7 @@
 <li>maximumPoolSize&#xFF1A;&#x6307;&#x5B9A;&#x4E86;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684;&#x6700;&#x5927;&#x7EBF;&#x7A0B;&#x6570;&#x91CF;&#x3002;</li>
 <li>keepAliveTime&#xFF1A;&#x5F53;&#x7EBF;&#x7A0B;&#x6C60;&#x7EBF;&#x7A0B;&#x6570;&#x91CF;&#x8D85;&#x8FC7;corePoolSize&#xFF0C;&#x591A;&#x4F59;&#x7684;&#x7A7A;&#x95F2;&#x7EBF;&#x7A0B;&#x7684;&#x5B58;&#x6D3B;&#x65F6;&#x95F4;&#xFF0C;&#x5373;&#x8D85;&#x8FC7;corePoolSizde&#x7684;&#x7A7A;&#x95F2;&#x7EBF;&#x7A0B;&#xFF0C;&#x5728;&#x591A;&#x957F;&#x65F6;&#x95F4;&#x5185;&#x4F1A;&#x88AB;&#x9500;&#x6BC1;&#x3002;</li>
 <li>unit&#xFF1A;keepAliveTime&#x7684;&#x5355;&#x4F4D;</li>
-<li>workQueue&#xFF1A;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#xFF0C;&#x88AB;&#x63D0;&#x4EA4;&#x4F46;&#x672A;&#x88AB;&#x6267;&#x884C;&#x7684;&#x4EFB;&#x52A1;&#x3002;</li>
+<li>workQueue&#xFF1A;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#xFF0C;&#x88AB;&#x63D0;&#x4EA4;&#x4F46;&#x672A;&#x88AB;&#x6267;&#x884C;&#x7684;&#x4EFB;&#x52A1;&#x3002;&#x5F53;&#x8BF7;&#x6C42;&#x7684;&#x7EBF;&#x7A0B;&#x6570;&#x5927;&#x4E8E;maximumPoolSize&#x65F6;&#xFF0C;&#x7EBF;&#x7A0B;&#x8FDB;&#x5165;BlockingQueue&#x963B;&#x585E;&#x961F;&#x5217;&#x3002;</li>
 <li>threadFactory:&#x7EBF;&#x7A0B;&#x5DE5;&#x5382;&#xFF0C;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#xFF0C;&#x4E00;&#x822C;&#x7528;&#x9ED8;&#x8BA4;&#x7684;&#x65E2;&#x53EF;</li>
 <li>handler&#xFF1A;&#x62D2;&#x7EDD;&#x7B56;&#x7565;&#x3002;&#x5F53;&#x4EFB;&#x52A1;&#x592A;&#x591A;&#x6765;&#x4E0D;&#x53CA;&#x5904;&#x7406;&#xFF0C;&#x5982;&#x4F55;&#x62D2;&#x7EDD;&#x4EFB;&#x52A1;&#x3002;</li>
 </ul>
@@ -862,7 +911,158 @@
 <li>DiscardOldestPolicy&#xFF1A;&#x8BE5;&#x7B56;&#x7565;&#x5C06;&#x4E22;&#x5F03;&#x6700;&#x8001;&#x7684;&#x4E00;&#x4E2A;&#x8BF7;&#x6C42;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5373;&#x5C06;&#x88AB;&#x6267;&#x884C;&#x7684;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x5E76;&#x5C1D;&#x8BD5;&#x518D;&#x6B21;&#x63D0;&#x4EA4;&#x5F53;&#x524D;&#x4EFB;&#x52A1;&#x3002;</li>
 <li>DiscardPolicy&#xFF1A;&#x8BE5;&#x7B56;&#x7565;&#x9ED8;&#x9ED8;&#x4E22;&#x5F03;&#x65E0;&#x6CD5;&#x5904;&#x7406;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x4E0D;&#x4E88;&#x4EFB;&#x4F55;&#x5904;&#x7406;&#x3002;</li>
 </ul>
-<p>&#x6269;&#x5C55;&#xFF1A;ThreadPoolExecutor&#x63D0;&#x4F9B;&#x4E86;beforeExecute(),afterExecute&#x548C;terminated()&#x4E09;&#x4E2A;&#x65B9;&#x6CD5;&#x7528;&#x6765;&#x5BF9;&#x7EBF;&#x7A0B;&#x6C60;&#x8FDB;&#x884C;&#x63A7;&#x5236;</p>
+<p>&#x6269;&#x5C55;&#xFF1A;ThreadPoolExecutor&#x63D0;&#x4F9B;&#x4E86;beforeExecute(),afterExecute&#x548C;terminated()&#x4E09;&#x4E2A;&#x65B9;&#x6CD5;&#x7528;&#x6765;&#x5BF9;&#x7EBF;&#x7A0B;&#x6C60;&#x8FDB;&#x884C;&#x63A7;&#x5236;&#x3002;</p>
+<p>&#x7EBF;&#x7A0B;&#x6C60;&#x4F7F;&#x7528;&#x6CE8;&#x610F;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>&#x5408;&#x7406;&#x8BBE;&#x7F6E;&#x5404;&#x7C7B;&#x53C2;&#x6570;&#xFF0C;&#x5E94;&#x6839;&#x636E;&#x5B9E;&#x9645;&#x4E1A;&#x52A1;&#x573A;&#x666F;&#x6765;&#x8BBE;&#x7F6E;&#x5408;&#x7406;&#x7684;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x6570;</li>
+<li>&#x7EBF;&#x7A0B;&#x8D44;&#x6E90;&#x5FC5;&#x987B;&#x901A;&#x8FC7;&#x7EBF;&#x7A0B;&#x6C60;&#x63D0;&#x4F9B;&#xFF0C;&#x4E0D;&#x5141;&#x8BB8;&#x5728;&#x5E94;&#x7528;&#x4E2D;&#x81EA;&#x884C;&#x663E;&#x5F0F;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;</li>
+<li>&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x6216;&#x7EBF;&#x7A0B;&#x6C60;&#x65F6;&#x8BF7;&#x6307;&#x5B9A;&#x6709;&#x610F;&#x4E49;&#x7684;&#x7EBF;&#x7A0B;&#x540D;&#x79F0;&#xFF0C;&#x65B9;&#x4FBF;&#x51FA;&#x9519;&#x65F6;&#x56DE;&#x6EAF;&#x3002;</li>
+</ul>
+<p>ThreadPoolExecutor&#x6E90;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-java">    <span class="hljs-comment">//Integer&#x5171;&#x6709;32&#x4F4D;&#xFF0C;&#x6700;&#x53F3;&#x8FB9;29&#x4F4D;&#x8868;&#x793A;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x6570;&#xFF0C;&#x6700;&#x5DE6;&#x8FB9;&#x4E09;&#x4F4D;&#x6807;&#x8BC6;&#x7EBF;&#x7A0B;&#x6C60;&#x72B6;&#x6001;&#x3002;&#x5373;&#xFF0C;3&#x4E2A;&#x4E8C;&#x8FDB;&#x5236;&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x4ECE;0&#x81F3;7&#x7684;8&#x4E2A;&#x4E0D;&#x540C;&#x6570;&#x503C;</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> COUNT_BITS = Integer.SIZE - <span class="hljs-number">3</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> CAPACITY   = (<span class="hljs-number">1</span> &lt;&lt; COUNT_BITS) - <span class="hljs-number">1</span>;
+
+    <span class="hljs-comment">//&#x6B64;&#x72B6;&#x6001;&#x8868;&#x793A;&#x7EBF;&#x7A0B;&#x6C60;&#x80FD;&#x63A5;&#x53D7;&#x65B0;&#x4EFB;&#x52A1;</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> RUNNING    = -<span class="hljs-number">1</span> &lt;&lt; COUNT_BITS;
+    <span class="hljs-comment">//&#x6B64;&#x72B6;&#x6001;&#x4E0D;&#x518D;&#x63A5;&#x53D7;&#x65B0;&#x4EFB;&#x52A1;&#xFF0C;&#x4F46;&#x53EF;&#x4EE5;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> SHUTDOWN   =  <span class="hljs-number">0</span> &lt;&lt; COUNT_BITS;
+    <span class="hljs-comment">//&#x6B64;&#x72B6;&#x6001;&#x5168;&#x9762;&#x62D2;&#x7EDD;&#xFF0C;&#x5E76;&#x4E2D;&#x65AD;&#x6B63;&#x5728;&#x5904;&#x7406;&#x7684;&#x4EFB;&#x52A1;</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> STOP       =  <span class="hljs-number">1</span> &lt;&lt; COUNT_BITS;
+    <span class="hljs-comment">//&#x6B64;&#x72B6;&#x6001;&#x8868;&#x793A;&#x6240;&#x6709;&#x4EFB;&#x52A1;&#x5DF2;&#x7ECF;&#x88AB;&#x7EC8;&#x6B62;</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TIDYING    =  <span class="hljs-number">2</span> &lt;&lt; COUNT_BITS;
+    <span class="hljs-comment">//&#x6B64;&#x72B6;&#x6001;&#x8868;&#x793A;&#x5DF2;&#x6E05;&#x7406;&#x5B8C;&#x73B0;&#x573A;</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TERMINATED =  <span class="hljs-number">3</span> &lt;&lt; COUNT_BITS;
+
+    <span class="hljs-comment">// Packing and unpacking ctl</span>
+    <span class="hljs-comment">//&#x8868;&#x793A;&#x7EBF;&#x7A0B;&#x6C60;&#x5F53;&#x524D;&#x5904;&#x4E8E;stop&#x72B6;&#x6001;</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">runStateOf</span><span class="hljs-params">(<span class="hljs-keyword">int</span> c)</span>     </span>{ <span class="hljs-keyword">return</span> c &amp; ~CAPACITY; }
+    <span class="hljs-comment">//&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x6570;</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">workerCountOf</span><span class="hljs-params">(<span class="hljs-keyword">int</span> c)</span>  </span>{ <span class="hljs-keyword">return</span> c &amp; CAPACITY; }
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">ctlOf</span><span class="hljs-params">(<span class="hljs-keyword">int</span> rs, <span class="hljs-keyword">int</span> wc)</span> </span>{ <span class="hljs-keyword">return</span> rs | wc; }
+</code></pre>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(Runnable command)</span> </span>{
+        <span class="hljs-keyword">if</span> (command == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
+        <span class="hljs-comment">//&#x8FD4;&#x56DE;&#x5305;&#x542B;&#x7EBF;&#x7A0B;&#x6570;&#x4EE5;&#x53CA;&#x7EBF;&#x7A0B;&#x6C60;&#x72B6;&#x6001;&#x7684;Integer&#x7C7B;&#x578B;&#x6570;&#x503C;</span>
+        <span class="hljs-keyword">int</span> c = ctl.get();
+        <span class="hljs-comment">//&#x5982;&#x679C;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x6570;&#x5C0F;&#x4E8E;&#x6838;&#x5FC3;&#x7EBF;&#x7A0B;&#x6570;&#xFF0C;&#x5219;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x4EFB;&#x52A1;&#x5E76;&#x6267;&#x884C;</span>
+        <span class="hljs-keyword">if</span> (workerCountOf(c) &lt; corePoolSize) {
+            <span class="hljs-comment">//&#x91CD;&#x8981;&#x65B9;&#x6CD5;</span>
+            <span class="hljs-keyword">if</span> (addWorker(command, <span class="hljs-keyword">true</span>))
+                <span class="hljs-keyword">return</span>;
+            <span class="hljs-comment">//&#x5982;&#x679C;&#x521B;&#x5EFA;&#x5931;&#x8D25;&#xFF0C;&#x9632;&#x6B62;&#x5916;&#x90E8;&#x5DF2;&#x7ECF;&#x5728;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x52A0;&#x5165;&#x65B0;&#x4EFB;&#x52A1;&#xFF0C;&#x91CD;&#x65B0;&#x83B7;&#x53D6;&#x4E0B;</span>
+            c = ctl.get();
+        }
+        <span class="hljs-comment">//&#x53EA;&#x6709;&#x7EBF;&#x7A0B;&#x6C60;&#x5904;&#x4E8E;RUNNING&#x72B6;&#x6001;&#xFF0C;&#x624D;&#x6267;&#x884C;&#x540E;&#x534A;&#x53E5;&#xFF1A;&#x7F6E;&#x5165;&#x961F;&#x5217;</span>
+        <span class="hljs-keyword">if</span> (isRunning(c) &amp;&amp; workQueue.offer(command)) {
+            <span class="hljs-keyword">int</span> recheck = ctl.get();
+            <span class="hljs-comment">//&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x6C60;&#x4E0D;&#x662F;Running&#x72B6;&#x6001;&#xFF0C;&#x5219;&#x5C06;&#x521A;&#x52A0;&#x5165;&#x961F;&#x5217;&#x7684;&#x4EFB;&#x52A1;&#x79FB;&#x9664;</span>
+            <span class="hljs-keyword">if</span> (! isRunning(recheck) &amp;&amp; remove(command))
+                reject(command);
+            <span class="hljs-comment">//&#x5982;&#x679C;&#x4E4B;&#x524D;&#x7684;&#x7EBF;&#x7A0B;&#x5DF2;&#x88AB;&#x6D88;&#x8D39;&#x5B8C;&#xFF0C;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;</span>
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (workerCountOf(recheck) == <span class="hljs-number">0</span>)
+                addWorker(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">false</span>);
+        }
+        <span class="hljs-comment">//&#x6838;&#x5FC3;&#x6C60;&#x548C;&#x961F;&#x5217;&#x90FD;&#x5DF2;&#x6EE1;&#xFF0C;&#x5C1D;&#x8BD5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7EBF;&#x7A0B;</span>
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!addWorker(command, <span class="hljs-keyword">false</span>))
+            <span class="hljs-comment">//&#x5982;&#x679C;addWorker&#x8FD4;&#x56DE;&#x7684;&#x662F;false&#xFF0C;&#x5373;&#x521B;&#x5EFA;&#x5931;&#x8D25;&#xFF0C;&#x5219;&#x5524;&#x9192;&#x62D2;&#x7EDD;&#x7B56;&#x7565;</span>
+            reject(command);
+    }
+</code></pre>
+<pre><code class="lang-java"><span class="hljs-comment">/**
+ * &#x6839;&#x636E;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x6C60;&#x72B6;&#x6001;&#xFF0C;&#x68C0;&#x67E5;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x65B0;&#x7684;&#x4EFB;&#x52A1;&#x7EBF;&#x7A0B;&#xFF0C;&#x5982;&#x679C;&#x53EF;&#x4EE5;&#x5219;&#x521B;&#x5EFA;&#x5E76;
+ * &#x542F;&#x52A8;&#x4EFB;&#x52A1;&#xFF0C;&#x5982;&#x679C;&#x4E00;&#x5207;&#x6B63;&#x5E38;&#x5219;&#x8FD4;&#x56DE;true&#xFF0C;&#x8FD4;&#x56DE;false&#x7684;&#x53EF;&#x80FD;&#x6027;&#x5982;&#x4E0B;&#xFF1A;
+ * 1. &#x7EBF;&#x7A0B;&#x6C60;&#x6CA1;&#x6709;&#x5904;&#x4E8E;RUNNING&#x72B6;&#x6001;
+ * 2. &#x7EBF;&#x7A0B;&#x5DE5;&#x5382;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x4EFB;&#x52A1;&#x7EBF;&#x7A0B;&#x5931;&#x8D25;&#x3002;
+ *
+ * firstTask&#xFF1A;&#x5916;&#x90E8;&#x542F;&#x52A8;&#x7EBF;&#x7A0B;&#x6C60;&#x65F6;&#x9700;&#x8981;&#x6784;&#x9020;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF0C;&#x5B83;&#x662F;&#x7EBF;&#x7A0B;&#x7684;&#x6BCD;&#x4F53;
+ * core&#xFF1A;&#x65B0;&#x589E;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x65F6;&#x7684;&#x5224;&#x65AD;&#x6307;&#x6807;&#xFF0C;&#x89E3;&#x91CA;&#x5982;&#x4E0B;
+ *      true&#xFF1A;&#x8868;&#x793A;&#x65B0;&#x589E;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x5224;&#x65AD;&#x5F53;&#x524D;RUNNING&#x72B6;&#x6001;&#x7684;&#x7EBF;&#x7A0B;&#x662F;&#x5426;&#x5C11;&#x4E8E;corePoolSize
+ *      false&#xFF1A;&#x8868;&#x793A;&#x65B0;&#x589E;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x5224;&#x65AD;&#x5F53;&#x524D;RUNNING&#x72B6;&#x6001;&#x7684;&#x7EBF;&#x7A0B;&#x662F;&#x5426;&#x5C11;&#x4E8E;maximumPoolSize
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">addWorker</span><span class="hljs-params">(Runnable firstTask, <span class="hljs-keyword">boolean</span> core)</span> </span>{
+        retry:
+        <span class="hljs-keyword">for</span> (;;) {
+            <span class="hljs-keyword">int</span> c = ctl.get();
+            <span class="hljs-keyword">int</span> rs = runStateOf(c);
+
+            <span class="hljs-comment">// Check if queue empty only if necessary.</span>
+            <span class="hljs-comment">//&#x5982;&#x679C;RUNNING&#x72B6;&#x6001;&#xFF0C;&#x5219;&#x6761;&#x4EF6;&#x4E3A;&#x5047;&#xFF0C;&#x4E0D;&#x6267;&#x884C;&#x540E;&#x9762;&#x7684;&#x5224;&#x65AD;</span>
+            <span class="hljs-comment">//&#x5982;&#x679C;&#x65F6;STOP&#x53CA;&#x4E4B;&#x4E0A;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x6216;&#x8005;firstTask&#x521D;&#x59CB;&#x7EBF;&#x7A0B;&#x4E0D;&#x4E3A;&#x7A7A;&#xFF0C;&#x6216;&#x8005;&#x961F;&#x5217;&#x4E3A;&#x7A7A;</span>
+            <span class="hljs-comment">//&#x90FD;&#x4F1A;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x521B;&#x5EFA;&#x5931;&#x8D25;</span>
+            <span class="hljs-keyword">if</span> (rs &gt;= SHUTDOWN &amp;&amp;
+                ! (rs == SHUTDOWN &amp;&amp;
+                   firstTask == <span class="hljs-keyword">null</span> &amp;&amp;
+                   ! workQueue.isEmpty()))
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+
+            <span class="hljs-keyword">for</span> (;;) {
+                <span class="hljs-keyword">int</span> wc = workerCountOf(c);
+                <span class="hljs-comment">//&#x5982;&#x679C;&#x8D85;&#x8FC7;&#x6700;&#x5927;&#x5141;&#x8BB8;&#x7EBF;&#x7A0B;&#x6570;&#x5219;&#x4E0D;&#x80FD;&#x518D;&#x6DFB;&#x52A0;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;</span>
+                <span class="hljs-comment">//&#x6700;&#x5927;&#x7EBF;&#x7A0B;&#x6570;&#x4E0D;&#x80FD;&#x8D85;&#x8FC7;2^29&#xFF0C;&#x5426;&#x5219;&#x4F1A;&#x5F71;&#x54CD;&#x5DE6;&#x8FB9;3&#x4F4D;&#x7684;&#x7EBF;&#x7A0B;&#x6C60;&#x72B6;&#x6001;&#x503C;</span>
+                <span class="hljs-keyword">if</span> (wc &gt;= CAPACITY ||
+                    wc &gt;= (core ? corePoolSize : maximumPoolSize))
+                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+                <span class="hljs-comment">//&#x5F53;&#x524D;&#x6D3B;&#x52A8;&#x7EBF;&#x7A0B;&#x6570;+1</span>
+                <span class="hljs-keyword">if</span> (compareAndIncrementWorkerCount(c))
+                    <span class="hljs-keyword">break</span> retry;
+                <span class="hljs-comment">//&#x7EBF;&#x7A0B;&#x6C60;&#x72B6;&#x6001;&#x548C;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x6570;&#x662F;&#x53EF;&#x53D8;&#x7684;&#xFF0C;&#x9700;&#x8981;&#x7ECF;&#x5E38;&#x63D0;&#x53D6;&#x8FD9;&#x4E2A;&#x6700;&#x65B0;&#x503C;</span>
+                c = ctl.get();  <span class="hljs-comment">// Re-read ctl</span>
+                <span class="hljs-comment">//&#x5982;&#x679C;&#x5DF2;&#x7ECF;&#x5173;&#x95ED;&#xFF0C;&#x5219;&#x518D;&#x6B21;&#x4ECE;rerty&#x6807;&#x7B7E;&#x5904;&#x8FDB;&#x5165;</span>
+                <span class="hljs-keyword">if</span> (runStateOf(c) != rs)
+                    <span class="hljs-keyword">continue</span> retry;
+                <span class="hljs-comment">// else CAS failed due to workerCount change; retry inner loop</span>
+            }
+        }
+        <span class="hljs-comment">//&#x5F00;&#x59CB;&#x521B;&#x5EFA;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;</span>
+        <span class="hljs-keyword">boolean</span> workerStarted = <span class="hljs-keyword">false</span>;
+        <span class="hljs-keyword">boolean</span> workerAdded = <span class="hljs-keyword">false</span>;
+        Worker w = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-comment">//&#x5229;&#x7528;Worker&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x6C60;&#x5DE5;&#x5382;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#xFF0C;&#x5E76;&#x5C01;&#x88C5;&#x6210;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;Worker&#x5BF9;&#x8C61;</span>
+            w = <span class="hljs-keyword">new</span> Worker(firstTask);
+            <span class="hljs-comment">//&#x6CE8;&#x610F;&#x8FD9;&#x662F;Worker&#x4E2D;&#x7684;&#x5C5E;&#x6027;&#x5BF9;&#x8C61;thread</span>
+            <span class="hljs-keyword">final</span> Thread t = w.thread;
+            <span class="hljs-keyword">if</span> (t != <span class="hljs-keyword">null</span>) {
+                <span class="hljs-comment">//&#x5728;&#x8FDB;&#x884C;ThreadPoolExecutor&#x7684;&#x654F;&#x611F;&#x64CD;&#x4F5C;&#x65F6;</span>
+                <span class="hljs-comment">//&#x90FD;&#x9700;&#x8981;&#x6301;&#x6709;&#x4E3B;&#x9501;&#xFF0C;&#x907F;&#x514D;&#x5728;&#x6DFB;&#x52A0;&#x548C;&#x542F;&#x52A8;&#x7EBF;&#x7A0B;&#x65F6;&#x88AB;&#x5E72;&#x6270;</span>
+                <span class="hljs-keyword">final</span> ReentrantLock mainLock = <span class="hljs-keyword">this</span>.mainLock;
+                mainLock.lock();
+                <span class="hljs-keyword">try</span> {
+                    <span class="hljs-comment">// Recheck while holding lock.</span>
+                    <span class="hljs-comment">// Back out on ThreadFactory failure or if</span>
+                    <span class="hljs-comment">// shut down before lock acquired.</span>
+                    <span class="hljs-keyword">int</span> rs = runStateOf(ctl.get());
+
+                    <span class="hljs-keyword">if</span> (rs &lt; SHUTDOWN ||
+                        (rs == SHUTDOWN &amp;&amp; firstTask == <span class="hljs-keyword">null</span>)) {
+                        <span class="hljs-keyword">if</span> (t.isAlive()) <span class="hljs-comment">// precheck that t is startable</span>
+                            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalThreadStateException();
+                        workers.add(w);
+                        <span class="hljs-keyword">int</span> s = workers.size();
+                        <span class="hljs-comment">//&#x6574;&#x4E2A;&#x7EBF;&#x7A0B;&#x6C60;&#x5728;&#x8FD0;&#x884C;&#x671F;&#x95F4;&#x7684;&#x6700;&#x5927;&#x5E76;&#x53D1;&#x4EFB;&#x52A1;&#x4E2A;&#x6570;</span>
+                        <span class="hljs-keyword">if</span> (s &gt; largestPoolSize)
+                            largestPoolSize = s;
+                        workerAdded = <span class="hljs-keyword">true</span>;
+                    }
+                } <span class="hljs-keyword">finally</span> {
+                    mainLock.unlock();
+                }
+                <span class="hljs-keyword">if</span> (workerAdded) {
+                    <span class="hljs-comment">//&#x6CE8;&#x610F;&#xFF0C;&#x5E76;&#x975E;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;execute&#x7684;command&#x53C2;&#x6570;&#x6307;&#x5411;&#x7684;&#x7EBF;&#x7A0B;</span>
+                    t.start();
+                    workerStarted = <span class="hljs-keyword">true</span>;
+                }
+            }
+        } <span class="hljs-keyword">finally</span> {
+            <span class="hljs-keyword">if</span> (! workerStarted)
+                <span class="hljs-comment">//&#x7EBF;&#x7A0B;&#x542F;&#x52A8;&#x5931;&#x8D25;&#xFF0C;&#x5C06;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x8BA1;&#x6570;&#x518D;&#x51CF;&#x56DE;&#x53BB;</span>
+                addWorkerFailed(w);
+        }
+        <span class="hljs-keyword">return</span> workerStarted;
+    }
+</code></pre>
 
                                 
                                 </section>
@@ -906,7 +1106,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"jdk内置JUC组件","level":"1.4.1","depth":2,"next":{"title":"JUC之AQS源码","level":"1.4.1.1","depth":3,"path":"THREAD/AQS.md","ref":"THREAD/AQS.md","articles":[]},"previous":{"title":"并发编程相关知识点","level":"1.4","depth":1,"path":"THREAD/BASE.md","ref":"THREAD/BASE.md","articles":[{"title":"jdk内置JUC组件","level":"1.4.1","depth":2,"path":"THREAD/JUC.md","ref":"THREAD/JUC.md","articles":[{"title":"JUC之AQS源码","level":"1.4.1.1","depth":3,"path":"THREAD/AQS.md","ref":"THREAD/AQS.md","articles":[]},{"title":"JUC之ReentrantLock源码","level":"1.4.1.2","depth":3,"path":"THREAD/ReentrantLock.md","ref":"THREAD/ReentrantLock.md","articles":[]},{"title":"JUC之Condition源码","level":"1.4.1.3","depth":3,"path":"THREAD/Condition.md","ref":"THREAD/Condition.md","articles":[]}]},{"title":"guava框架","level":"1.4.2","depth":2,"path":"THREAD/GUVVA.md","ref":"THREAD/GUVVA.md","articles":[]},{"title":"Disruptor框架","level":"1.4.3","depth":2,"path":"THREAD/DISRUPTOR .md","ref":"THREAD/DISRUPTOR .md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"THREAD/JUC.md","mtime":"2019-09-03T07:08:41.135Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-09T09:56:42.131Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"typora-copy-images-to":"..\\image","title":"jdk内置JUC组件","level":"1.4.1","depth":2,"next":{"title":"JUC之AQS源码","level":"1.4.1.1","depth":3,"path":"THREAD/AQS.md","ref":"THREAD/AQS.md","articles":[]},"previous":{"title":"并发编程相关知识点","level":"1.4","depth":1,"path":"THREAD/BASE.md","ref":"THREAD/BASE.md","articles":[{"title":"jdk内置JUC组件","level":"1.4.1","depth":2,"path":"THREAD/JUC.md","ref":"THREAD/JUC.md","articles":[{"title":"JUC之AQS源码","level":"1.4.1.1","depth":3,"path":"THREAD/AQS.md","ref":"THREAD/AQS.md","articles":[]},{"title":"JUC之ReentrantLock源码","level":"1.4.1.2","depth":3,"path":"THREAD/ReentrantLock.md","ref":"THREAD/ReentrantLock.md","articles":[]},{"title":"JUC之Condition源码","level":"1.4.1.3","depth":3,"path":"THREAD/Condition.md","ref":"THREAD/Condition.md","articles":[]}]},{"title":"guava框架","level":"1.4.2","depth":2,"path":"THREAD/GUVVA.md","ref":"THREAD/GUVVA.md","articles":[]},{"title":"Disruptor框架","level":"1.4.3","depth":2,"path":"THREAD/DISRUPTOR .md","ref":"THREAD/DISRUPTOR .md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"THREAD/JUC.md","mtime":"2019-09-11T15:00:20.510Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-11T15:00:56.569Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

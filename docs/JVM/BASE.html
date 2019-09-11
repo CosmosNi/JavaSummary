@@ -76,7 +76,7 @@
     <link rel="next" href="../THREAD/BASE.html" />
     
     
-    <link rel="prev" href="../JDK/BASE.html" />
+    <link rel="prev" href="../JDK/hashMap.html" />
     
 
     </head>
@@ -132,6 +132,27 @@
                 </a>
             
 
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../JDK/hashMap.html">
+            
+                <a href="../JDK/hashMap.html">
+            
+                    
+                        <b>1.2.1.</b>
+                    
+                    HashMap源码解析
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -520,6 +541,21 @@
             
         </li>
     
+        <li class="chapter " data-level="1.10.3" data-path="../DESIGN/proxy.html">
+            
+                <a href="../DESIGN/proxy.html">
+            
+                    
+                        <b>1.10.3.</b>
+                    
+                    代理模式
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -729,6 +765,17 @@
 <li>G1&#xFF1A;-XX:+UseG1GC&#x3002;&#x4E0E;CMS&#x76F8;&#x6BD4;&#xFF0C;G1&#x5177;&#x5907;&#x538B;&#x7F29;&#x529F;&#x80FD;&#xFF0C;&#x80FD;&#x907F;&#x514D;&#x788E;&#x7247;&#x95EE;&#x9898;&#x3002;GI &#x5C06; Java &#x5806;&#x7A7A;&#x95F4;&#x5206;&#x5272;&#x6210;&#x4E86;&#x82E5;&#x5E72;&#x76F8;&#x540C;&#x5927;&#x5C0F;&#x7684; &#x533A;&#x57DF;&#xFF0C;&#x5373; region &#xFF0C;&#x5305;&#x62EC; Eden &#x3001;
 Survivor &#x3001; Old &#x3001; Humongous &#x56DB;&#x79CD;&#x7C7B;&#x578B;&#x3002;&#x5176; &#x5176;&#x4E2D;&#xFF0C; Humongous &#x662F;&#x7279;&#x6B8A;&#x7684; Old &#x7C7B;&#x578B;&#xFF0C;&#x4E13;&#x95E8;&#x653E;&#x7F6E;&#x5927;&#x578B;&#x5BF9;&#x8C61;&#x3002;&#x8FD9;&#x6837;&#x7684;&#x5212;&#x5206;&#x65B9;&#x5F0F;&#x610F;&#x6627;&#x7740;&#x4E0D;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x8FDE;&#x7EED;&#x7684;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x7BA1;&#x7406;&#x5BF9;&#x8C61;&#x3002; G I &#x5C06;&#x7A7A;&#x95F4;&#x5206;&#x4E3A;&#x591A;&#x4E2A;&#x533A;&#x57DF;&#xFF0C;&#x4F18;&#x5148;&#x56DE;&#x6536;&#x5783;&#x573E;&#x6700;&#x591A;&#x7684; &#x533A;&#x57DF;&#x3002; GI &#x91C7;&#x7528;&#x7684;&#x662F;&#x201C;Mark-copy&#x201D;&#xFF0C;&#x6709;&#x975E;&#x5E38;&#x597D;&#x7684;&#x7A7A;&#x95F4;&#x6574;&#x5408;&#x80FD;&#x529B;&#xFF0C;&#x4E0D;&#x4F1A;&#x4EA7;&#x751F;&#x5927;&#x91CF;&#x7684;&#x7A7A;&#x95F4;&#x788E;&#x7247;&#x3002;G I &#x7684;&#x4E00;&#x5927;&#x4F18;&#x52BF;&#x5728;&#x4E8E;&#x53EF;&#x9884;&#x6D4B;&#x7684;&#x505C;&#x987F;&#x65F6;&#x95F4;&#xFF0C;&#x80FD;&#x591F;&#x5C3D;&#x53EF;&#x80FD;&#x5FEB;&#x5730;&#x5728;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x5185;&#x5B8C;&#x6210;&#x5783;&#x573E;&#x56DE;&#x6536;&#x4EFB;&#x52A1;&#x3002;&#x5728; JDKl l &#x4E2D;&#xFF0C;&#x5DF2;&#x7ECF;&#x5C06; G I &#x8BBE;&#x4E3A;&#x9ED8;&#x8BA4;&#x5783;&#x573E;&#x56DE;&#x6536;&#x5668; &#xFF0C; &#x901A;&#x8FC7; jstat &#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x5783;&#x573E;&#x56DE;&#x6536;&#x60C5;&#x51B5;&#x3002;</li>
 </ul>
+<h6 id="18&#x5F15;&#x7528;&#x7C7B;&#x578B;">1.8&#x5F15;&#x7528;&#x7C7B;&#x578B;</h6>
+<p>&#x5BF9;&#x8C61;&#x5728;&#x5806;&#x4E0A;&#x521B;&#x5EFA;&#x4E4B;&#x540E;&#x6240;&#x6301;&#x6709;&#x7684;&#x5F15;&#x7528;&#x5176;&#x5B9E;&#x662F;&#x4E00;&#x79CD;&#x53D8;&#x91CF;&#x7C7B;&#x578B;&#xFF0C;&#x5F15;&#x7528;&#x4E4B;&#x95F4;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8D4B;&#x503C;&#x6784;&#x6210;&#x4E00;&#x6761;&#x5F15;&#x7528;&#x94FE;&#x3002;&#x4ECE;GC Roots&#x5F00;&#x59CB;&#x904D;&#x5386;&#xFF0C;&#x5224;&#x65AD;&#x5F15;&#x7528;&#x662F;&#x5426;&#x53EF;&#x8FBE;&#x3002;&#x5F15;&#x7528;&#x7684;&#x53EF;&#x8FBE;&#x6027;&#x662F;&#x5224;&#x65AD;&#x80FD;&#x5426;&#x88AB;&#x5783;&#x573E;&#x56DE;&#x6536;&#x7684;&#x57FA;&#x672C;&#x6761;&#x4EF6;&#x3002;JVM&#x4F1A;&#x636E;&#x6B64;&#x81EA;&#x52A8;&#x7BA1;&#x7406;&#x5185;&#x5B58;&#x7684;&#x5206;&#x914D;&#x4E0E;&#x56DE;&#x6536;&#x3002;&#x4F46;&#x5728;&#x67D0;&#x4E9B;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x5373;&#x4F7F;&#x5F15;&#x7528;&#x53EF;&#x8FBE;&#xFF0C;&#x4E5F;&#x5E0C;&#x671B;&#x80FD;&#x591F;&#x6839;&#x636E;&#x8BED;&#x4E49;&#x7684;&#x5F3A;&#x5F31;&#x8FDB;&#x884C;&#x6709;&#x9009;&#x62E9;&#x7684;&#x56DE;&#x6536;&#xFF0C;&#x4EE5;&#x4FDD;&#x8BC1;&#x7CFB;&#x7EDF;&#x7684;&#x6B63;&#x5E38;&#x8FD0;&#x884C;&#x3002;&#x6839;&#x636E;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#x8BED;&#x4E49;&#x7684;&#x5F3A;&#x5F31;&#x6765;&#x51B3;&#x5B9A;&#x5783;&#x573E;&#x56DE;&#x6536;&#x7684;&#x9636;&#x6BB5;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x628A;&#x5F15;&#x7528;&#x5206;&#x4E3A;&#x5F3A;&#x5F15;&#x7528;&#x3001;&#x5F31;&#x5F15;&#x7528;&#x3001;&#x8F6F;&#x5F15;&#x7528;&#x548C;&#x865A;&#x5F15;&#x7528;&#x3002;</p>
+<ul>
+<li>&#x5F3A;&#x5F15;&#x7528;&#xFF1A;&#x5982;Object obj = new Object()&#xFF1B;&#x8FD9;&#x6837;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x548C;&#x5B9A;&#x4E49;&#x5C31;&#x4F1A;&#x4EA7;&#x751F;&#x5BF9;&#x8BE5;&#x5F15;&#x7528;&#x7684;&#x5F3A;&#x5F15;&#x7528;&#x3002;&#x53EA;&#x8981;&#x5BF9;&#x8C61;&#x6709;&#x5F3A;&#x5F15;&#x7528;&#x6307;&#x5411;&#xFF0C;&#x5E76;&#x4E14;GC Root&#x53EF;&#x8FBE;&#xFF0C;&#x90A3;&#x4E48;Java&#x5185;&#x5B58;&#x56DE;&#x6536;&#x65F6;&#xFF0C;&#x5373;&#x4F7F;&#x6FD2;&#x4E34;&#x5185;&#x5B58;&#x8017;&#x5C3D;&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x56DE;&#x6536;&#x8BE5;&#x5BF9;&#x8C61;&#x3002;</li>
+<li>&#x8F6F;&#x5F15;&#x7528;&#xFF1A;&#x5F15;&#x7528;&#x529B;&#x5EA6;&#x5F31;&#x4E8E;&#x201C;&#x5F3A;&#x5F15;&#x7528;&#x201D;&#xFF0C;&#x4F7F;&#x7528;&#x5728;&#x975E;&#x5FC5;&#x9700;&#x5BF9;&#x8C61;&#x7684;&#x573A;&#x666F;&#x3002;&#x5728;&#x5373;&#x5C06;OOM&#x4E4B;&#x524D;&#xFF0C;&#x5783;&#x573E;&#x56DE;&#x6536;&#x5668;&#x4F1A;&#x628A;&#x8FD9;&#x4E9B;&#x8F6F;&#x5F15;&#x7528;&#x6307;&#x5411;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x52A0;&#x5165;&#x56DE;&#x6536;&#x8303;&#x56F4;&#xFF0C;&#x4EE5;&#x83B7;&#x53D6;&#x66F4;&#x591A;&#x7684;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#xFF0C;&#x8BA9;&#x7A0B;&#x5E8F;&#x80FD;&#x591F;&#x7EE7;&#x7EED;&#x5065;&#x5EB7;&#x7684;&#x8FD0;&#x884C;&#x3002;&#x4E3B;&#x8981;&#x7528;&#x6765;&#x7F13;&#x5B58;&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x95F4;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;&#x53CA;&#x4E0D;&#x9700;&#x8981;&#x5B9E;&#x65F6;&#x4FDD;&#x5B58;&#x7684;&#x7528;&#x6237;&#x884C;&#x4E3A;&#x7B49;&#x3002;</li>
+<li>&#x5F31;&#x5F15;&#x7528;&#xFF1A;&#x5F15;&#x7528;&#x5F3A;&#x5EA6;&#x8F83;&#x524D;&#x4E24;&#x8005;&#x66F4;&#x5F31;&#xFF0C;&#x4E5F;&#x662F;&#x7528;&#x6765;&#x63CF;&#x8FF0;&#x975E;&#x5FC5;&#x9700;&#x5BF9;&#x8C61;&#x7684;&#x3002;&#x5982;&#x679C;&#x5F31;&#x5F15;&#x7528;&#x6307;&#x5411;&#x7684;&#x5BF9;&#x8C61;&#x53EA;&#x5B58;&#x5728;&#x5F31;&#x5F15;&#x7528;&#x8FD9;&#x6761;&#x7EBF;&#x8DEF;&#xFF0C;&#x5219;&#x5728;&#x4E0B;&#x4E00;&#x6B21; YGC &#x65F6;&#x4F1A;&#x88AB;&#x56DE;&#x6536;&#x3002;
+&#x7531;&#x4E8E; YGC &#x65F6;&#x95F4;&#x7684;&#x4E0D;&#x786E;&#x5B9A;&#x6027;&#xFF0C;&#x5F31;&#x5F15;&#x7528;&#x4F55;&#x65F6;&#x88AB;&#x56DE;&#x6536;&#x4E5F;&#x5177;&#x6709;&#x4E0D;&#x786E;&#x5B9A;&#x6027;&#x3002;&#x5F31;&#x5F15;&#x7528;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x6307;
+&#x5411;&#x67D0;&#x4E2A;&#x6613;&#x6D88;&#x5931;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5728;&#x5F3A;&#x5F15;&#x7528;&#x65AD;&#x5F00;&#x540E;&#xFF0C;&#x6B64;&#x5F15;&#x7528;&#x4E0D;&#x4F1A;&#x52AB;&#x6301;&#x5BF9;&#x8C61;&#x3002;&#x8C03;&#x7528; WeakReference.get&#xFF08;&#xFF09;&#x53EF;&#x80FD;&#x8FD4;&#x56DE; null &#xFF0C;&#x8981;&#x6CE8;&#x610F;&#x7A7A;&#x6307;&#x9488;&#x5F02;&#x5E38;&#x3002; </li>
+<li>&#x865A;&#x5F15;&#x7528;:&#x662F;&#x6781;&#x5F31;&#x7684;&#x4E00;&#x79CD;&#x5F15;&#x7528;&#x5173;&#x7CFB;&#xFF0C;&#x5B9A;&#x4E49;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x5C31;&#x65E0;&#x6CD5;&#x901A;&#x8FC7;&#x8BE5;&#x5F15;&#x7528;&#x83B7;&#x53D6;&#x6307;&#x5411;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x4E3A;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x8BBE;&#x7F6E;&#x865A;&#x5F15;&#x7528;&#x7684;&#x552F;&#x4E00;&#x76EE;&#x7684;&#x5C31;&#x662F;&#x5E0C;&#x671B;&#x80FD;&#x5728;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x88AB;&#x56DE;&#x6536;&#x65F6;&#x6536;&#x5230;&#x4E00;&#x4E2A;&#x7CFB;&#x7EDF;&#x901A;&#x77E5;&#x3002;&#x865A;&#x5F15;&#x7528;&#x5FC5;&#x987B;&#x4E0E;&#x5F15;&#x7528;&#x961F;&#x5217;&#x8054;&#x5408;&#x4F7F;&#x7528;&#xFF0C;&#x5F53;&#x5783;&#x573E;&#x56DE;&#x6536;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x53D1;&#x73B0;&#x5B58;&#x5728;&#x865A;&#x5F15;&#x7528;&#xFF0C;&#x5C31;&#x4F1A;&#x5728;&#x56DE;&#x6536;&#x5BF9;&#x8C61;&#x5185;&#x5B58;&#x524D;&#xFF0C;&#x628A;&#x8FD9;&#x4E2A;&#x865A;&#x5F15;&#x7528;&#x52A0;&#x5165;&#x4E0E;&#x4E4B;&#x5173;&#x8054;&#x7684;&#x5F15;&#x7528;&#x961F;&#x5217;&#x4E2D;&#x3002; </li>
+</ul>
+<p><img src="../image/1568191561481.png" alt="1568191561481"></p>
 
                                 
                                 </section>
@@ -756,7 +803,7 @@ Survivor &#x3001; Old &#x3001; Humongous &#x56DB;&#x79CD;&#x7C7B;&#x578B;&#x3002
 
             
                 
-                <a href="../JDK/BASE.html" class="navigation navigation-prev " aria-label="Previous page: java基础总结">
+                <a href="../JDK/hashMap.html" class="navigation navigation-prev " aria-label="Previous page: HashMap源码解析">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -772,7 +819,7 @@ Survivor &#x3001; Old &#x3001; Humongous &#x56DB;&#x79CD;&#x7C7B;&#x578B;&#x3002
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"typora-copy-images-to":"..\\image","title":"JVM虚拟机","level":"1.3","depth":1,"next":{"title":"并发编程相关知识点","level":"1.4","depth":1,"path":"THREAD/BASE.md","ref":"THREAD/BASE.md","articles":[{"title":"jdk内置JUC组件","level":"1.4.1","depth":2,"path":"THREAD/JUC.md","ref":"THREAD/JUC.md","articles":[{"title":"JUC之AQS源码","level":"1.4.1.1","depth":3,"path":"THREAD/AQS.md","ref":"THREAD/AQS.md","articles":[]},{"title":"JUC之ReentrantLock源码","level":"1.4.1.2","depth":3,"path":"THREAD/ReentrantLock.md","ref":"THREAD/ReentrantLock.md","articles":[]},{"title":"JUC之Condition源码","level":"1.4.1.3","depth":3,"path":"THREAD/Condition.md","ref":"THREAD/Condition.md","articles":[]}]},{"title":"guava框架","level":"1.4.2","depth":2,"path":"THREAD/GUVVA.md","ref":"THREAD/GUVVA.md","articles":[]},{"title":"Disruptor框架","level":"1.4.3","depth":2,"path":"THREAD/DISRUPTOR .md","ref":"THREAD/DISRUPTOR .md","articles":[]}]},"previous":{"title":"java基础总结","level":"1.2","depth":1,"path":"JDK/BASE.md","ref":"JDK/BASE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"JVM/BASE.md","mtime":"2019-09-03T06:17:40.529Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-09T09:56:42.131Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"typora-copy-images-to":"..\\image","title":"JVM虚拟机","level":"1.3","depth":1,"next":{"title":"并发编程相关知识点","level":"1.4","depth":1,"path":"THREAD/BASE.md","ref":"THREAD/BASE.md","articles":[{"title":"jdk内置JUC组件","level":"1.4.1","depth":2,"path":"THREAD/JUC.md","ref":"THREAD/JUC.md","articles":[{"title":"JUC之AQS源码","level":"1.4.1.1","depth":3,"path":"THREAD/AQS.md","ref":"THREAD/AQS.md","articles":[]},{"title":"JUC之ReentrantLock源码","level":"1.4.1.2","depth":3,"path":"THREAD/ReentrantLock.md","ref":"THREAD/ReentrantLock.md","articles":[]},{"title":"JUC之Condition源码","level":"1.4.1.3","depth":3,"path":"THREAD/Condition.md","ref":"THREAD/Condition.md","articles":[]}]},{"title":"guava框架","level":"1.4.2","depth":2,"path":"THREAD/GUVVA.md","ref":"THREAD/GUVVA.md","articles":[]},{"title":"Disruptor框架","level":"1.4.3","depth":2,"path":"THREAD/DISRUPTOR .md","ref":"THREAD/DISRUPTOR .md","articles":[]}]},"previous":{"title":"HashMap源码解析","level":"1.2.1","depth":2,"path":"JDK/hashMap.md","ref":"JDK/hashMap.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"JVM/BASE.md","mtime":"2019-09-11T08:53:14.822Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-11T15:00:56.569Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

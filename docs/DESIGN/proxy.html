@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>附录 · GitBook</title>
+        <title>代理模式 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -73,10 +73,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="idea.html" />
+    <link rel="next" href="../DISTRIBUTED/BASE.html" />
     
     
-    <link rel="prev" href="../CONTAINER/BASE.html" />
+    <link rel="prev" href="Strategy.html" />
     
 
     </head>
@@ -495,9 +495,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="../DESIGN/BASE.html">
+        <li class="chapter " data-level="1.10" data-path="BASE.html">
             
-                <a href="../DESIGN/BASE.html">
+                <a href="BASE.html">
             
                     
                         <b>1.10.</b>
@@ -511,9 +511,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.10.1" data-path="../DESIGN/Singleton.html">
+        <li class="chapter " data-level="1.10.1" data-path="Singleton.html">
             
-                <a href="../DESIGN/Singleton.html">
+                <a href="Singleton.html">
             
                     
                         <b>1.10.1.</b>
@@ -526,9 +526,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10.2" data-path="../DESIGN/Strategy.html">
+        <li class="chapter " data-level="1.10.2" data-path="Strategy.html">
             
-                <a href="../DESIGN/Strategy.html">
+                <a href="Strategy.html">
             
                     
                         <b>1.10.2.</b>
@@ -541,9 +541,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10.3" data-path="../DESIGN/proxy.html">
+        <li class="chapter active" data-level="1.10.3" data-path="proxy.html">
             
-                <a href="../DESIGN/proxy.html">
+                <a href="proxy.html">
             
                     
                         <b>1.10.3.</b>
@@ -642,9 +642,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.13" data-path="base.html">
+        <li class="chapter " data-level="1.13" data-path="../appendix/base.html">
             
-                <a href="base.html">
+                <a href="../appendix/base.html">
             
                     
                         <b>1.13.</b>
@@ -658,9 +658,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.13.1" data-path="idea.html">
+        <li class="chapter " data-level="1.13.1" data-path="../appendix/idea.html">
             
-                <a href="idea.html">
+                <a href="../appendix/idea.html">
             
                     
                         <b>1.13.1.</b>
@@ -673,9 +673,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13.2" data-path="linux.html">
+        <li class="chapter " data-level="1.13.2" data-path="../appendix/linux.html">
             
-                <a href="linux.html">
+                <a href="../appendix/linux.html">
             
                     
                         <b>1.13.2.</b>
@@ -723,7 +723,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >附录</a>
+        <a href=".." >代理模式</a>
     </h1>
 </div>
 
@@ -738,7 +738,164 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x9644;&#x5F55;">&#x9644;&#x5F55;</h1>
+                                <h1 id="&#x4EE3;&#x7406;&#x6A21;&#x5F0F;">&#x4EE3;&#x7406;&#x6A21;&#x5F0F;</h1>
+<p>&#x5B9A;&#x4E49;&#xFF1A;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;&#x5373;&#x7ED9;&#x67D0;&#x4E2A;&#x5BF9;&#x8C61;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x4EE3;&#x7406;&#x5BF9;&#x8C61;&#xFF0C;&#x5E76;&#x7531;&#x4EE3;&#x7406;&#x5BF9;&#x8C61;&#x63A7;&#x5236;&#x5BF9;&#x539F;&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#x3002;&#x7B80;&#x5355;&#x6765;&#x8BF4;&#xFF0C;&#x5C31;&#x662F;&#x73B0;&#x5B9E;&#x751F;&#x6D3B;&#x7684;&#x4E2D;&#x4ECB;&#xFF0C;&#x5C31;&#x4EE5;&#x623F;&#x4EA7;&#x4E2D;&#x4ECB;&#x6765;&#x8BF4;&#xFF0C;&#x5BA2;&#x6237;&#x59D4;&#x6258;&#x4E2D;&#x4ECB;&#x5BFB;&#x627E;&#x623F;&#x6E90;&#xFF0C;&#x5177;&#x4F53;&#x7684;&#x7E41;&#x6742;&#x624B;&#x7EED;&#x5747;&#x7531;&#x4E2D;&#x4ECB;&#x5904;&#x7406;&#x3002;</p>
+<ul>
+<li>&#x4E2D;&#x4ECB;&#x9694;&#x79BB;</li>
+<li>&#x5F00;&#x95ED;&#x539F;&#x5219;&#xFF0C;&#x589E;&#x52A0;&#x529F;&#x80FD;</li>
+</ul>
+<p>&#x4EE3;&#x7406;&#x53EF;&#x5206;&#x4E3A;&#x9759;&#x6001;&#x4EE3;&#x7406;&#x4EE5;&#x53CA;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x3002;&#x6B64;&#x5904;&#x4E3B;&#x8981;&#x4ECB;&#x7ECD;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x3002;&#x57FA;&#x4E8E;jdk&#x4EE5;&#x53CA;cglib&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x3002;</p>
+<ul>
+<li>jdk&#xFF1A;</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DynamicProxy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">InvocationHandler</span> </span>{
+
+    <span class="hljs-keyword">private</span> Object object;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DynamicProxy</span><span class="hljs-params">(Object object)</span> </span>{
+        <span class="hljs-keyword">this</span>.object = object;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">invoke</span><span class="hljs-params">(Object proxy, Method method, Object[] args)</span> <span class="hljs-keyword">throws</span> Throwable </span>{
+        System.out.println(<span class="hljs-string">&quot;&#x6B63;&#x5728;&#x6267;&#x884C;&#xFF1A;&quot;</span>);
+        Object result = method.invoke(object, args);
+        System.out.println(result);
+        System.out.println(<span class="hljs-string">&quot;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#xFF01;&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+}
+</code></pre>
+<ul>
+<li>cglib:</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CglibProxy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MethodInterceptor</span> </span>{
+
+    <span class="hljs-keyword">private</span> Object target;
+
+    <span class="hljs-comment">/**
+     * &#x76F8;&#x5F53;&#x4E8E;JDK&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x4E2D;&#x7684;&#x7ED1;&#x5B9A;
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getInstance</span><span class="hljs-params">(Object target)</span> </span>{
+        <span class="hljs-comment">//&#x7ED9;&#x4E1A;&#x52A1;&#x5BF9;&#x8C61;&#x8D4B;&#x503C;</span>
+        <span class="hljs-keyword">this</span>.target = target;
+        <span class="hljs-comment">//&#x521B;&#x5EFA;&#x52A0;&#x5F3A;&#x5668;&#xFF0C;&#x7528;&#x6765;&#x521B;&#x5EFA;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x7C7B;</span>
+        Enhancer enhancer = <span class="hljs-keyword">new</span> Enhancer();
+        <span class="hljs-comment">//&#x4E3A;&#x52A0;&#x5F3A;&#x5668;&#x6307;&#x5B9A;&#x8981;&#x4EE3;&#x7406;&#x7684;&#x4E1A;&#x52A1;&#x7C7B;&#xFF08;&#x5373;&#xFF1A;&#x4E3A;&#x4E0B;&#x9762;&#x751F;&#x6210;&#x7684;&#x4EE3;&#x7406;&#x7C7B;&#x6307;&#x5B9A;&#x7236;&#x7C7B;&#xFF09;</span>
+        enhancer.setSuperclass(<span class="hljs-keyword">this</span>.target.getClass());
+        <span class="hljs-comment">//&#x8BBE;&#x7F6E;&#x56DE;&#x8C03;&#xFF1A;&#x5BF9;&#x4E8E;&#x4EE3;&#x7406;&#x7C7B;&#x4E0A;&#x6240;&#x6709;&#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x90FD;&#x4F1A;&#x8C03;&#x7528;CallBack&#xFF0C;&#x800C;Callback&#x5219;&#x9700;&#x8981;&#x5B9E;&#x73B0;intercept()&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x62E6;</span>
+        enhancer.setCallback(<span class="hljs-keyword">this</span>);
+        <span class="hljs-comment">// &#x521B;&#x5EFA;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x7C7B;&#x5BF9;&#x8C61;&#x5E76;&#x8FD4;&#x56DE;</span>
+        <span class="hljs-keyword">return</span> enhancer.create();
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">intercept</span><span class="hljs-params">(Object o, Method method, Object[] objects, MethodProxy methodProxy)</span> <span class="hljs-keyword">throws</span> Throwable </span>{
+        System.out.println(<span class="hljs-string">&quot;&#x9884;&#x5904;&#x7406;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&quot;</span>);
+        Objepublic <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CglibProxy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MethodInterceptor</span> </span>{
+
+    <span class="hljs-keyword">private</span> Object target;
+
+    <span class="hljs-comment">/**
+     * &#x76F8;&#x5F53;&#x4E8E;JDK&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x4E2D;&#x7684;&#x7ED1;&#x5B9A;
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getInstance</span><span class="hljs-params">(Object target)</span> </span>{
+        <span class="hljs-comment">//&#x7ED9;&#x4E1A;&#x52A1;&#x5BF9;&#x8C61;&#x8D4B;&#x503C;</span>
+        <span class="hljs-keyword">this</span>.target = target;
+        <span class="hljs-comment">//&#x521B;&#x5EFA;&#x52A0;&#x5F3A;&#x5668;&#xFF0C;&#x7528;&#x6765;&#x521B;&#x5EFA;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x7C7B;</span>
+        Enhancer enhancer = <span class="hljs-keyword">new</span> Enhancer();
+        <span class="hljs-comment">//&#x4E3A;&#x52A0;&#x5F3A;&#x5668;&#x6307;&#x5B9A;&#x8981;&#x4EE3;&#x7406;&#x7684;&#x4E1A;&#x52A1;&#x7C7B;&#xFF08;&#x5373;&#xFF1A;&#x4E3A;&#x4E0B;&#x9762;&#x751F;&#x6210;&#x7684;&#x4EE3;&#x7406;&#x7C7B;&#x6307;&#x5B9A;&#x7236;&#x7C7B;&#xFF09;</span>
+        enhancer.setSuperclass(<span class="hljs-keyword">this</span>.target.getClass());
+        <span class="hljs-comment">//&#x8BBE;&#x7F6E;&#x56DE;&#x8C03;&#xFF1A;&#x5BF9;&#x4E8E;&#x4EE3;&#x7406;&#x7C7B;&#x4E0A;&#x6240;&#x6709;&#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x90FD;&#x4F1A;&#x8C03;&#x7528;CallBack&#xFF0C;&#x800C;Callback&#x5219;&#x9700;&#x8981;&#x5B9E;&#x73B0;intercept()&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x62E6;</span>
+        enhancer.setCallback(<span class="hljs-keyword">this</span>);
+        <span class="hljs-comment">// &#x521B;&#x5EFA;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x7C7B;&#x5BF9;&#x8C61;&#x5E76;&#x8FD4;&#x56DE;</span>
+        <span class="hljs-keyword">return</span> enhancer.create();
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">intercept</span><span class="hljs-params">(Object o, Method method, Object[] objects, MethodProxy methodProxy)</span> <span class="hljs-keyword">throws</span> Throwable </span>{
+        System.out.println(<span class="hljs-string">&quot;&#x9884;&#x5904;&#x7406;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&quot;</span>);
+        Object result = methodProxy.invokeSuper(o, objects);
+        System.out.println(result);
+        System.out.println(<span class="hljs-string">&quot;&#x8C03;&#x7528;&#x540E;&#x64CD;&#x4F5C;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&quot;</span>);
+        <span class="hljs-keyword">return</span> result;
+    }ct result = methodProxy.invokeSuper(o, objects);
+        System.out.println(result);
+        System.out.println(<span class="hljs-string">&quot;&#x8C03;&#x7528;&#x540E;&#x64CD;&#x4F5C;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&quot;</span>);
+        <span class="hljs-keyword">return</span> result;
+    }<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CglibProxy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MethodInterceptor</span> </span>{
+
+    <span class="hljs-keyword">private</span> Object target;
+
+    <span class="hljs-comment">/**
+     * &#x76F8;&#x5F53;&#x4E8E;JDK&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x4E2D;&#x7684;&#x7ED1;&#x5B9A;
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getInstance</span><span class="hljs-params">(Object target)</span> </span>{
+        <span class="hljs-comment">//&#x7ED9;&#x4E1A;&#x52A1;&#x5BF9;&#x8C61;&#x8D4B;&#x503C;</span>
+        <span class="hljs-keyword">this</span>.target = target;
+        <span class="hljs-comment">//&#x521B;&#x5EFA;&#x52A0;&#x5F3A;&#x5668;&#xFF0C;&#x7528;&#x6765;&#x521B;&#x5EFA;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x7C7B;</span>
+        Enhancer enhancer = <span class="hljs-keyword">new</span> Enhancer();
+        <span class="hljs-comment">//&#x4E3A;&#x52A0;&#x5F3A;&#x5668;&#x6307;&#x5B9A;&#x8981;&#x4EE3;&#x7406;&#x7684;&#x4E1A;&#x52A1;&#x7C7B;&#xFF08;&#x5373;&#xFF1A;&#x4E3A;&#x4E0B;&#x9762;&#x751F;&#x6210;&#x7684;&#x4EE3;&#x7406;&#x7C7B;&#x6307;&#x5B9A;&#x7236;&#x7C7B;&#xFF09;</span>
+        enhancer.setSuperclass(<span class="hljs-keyword">this</span>.target.getClass());
+        <span class="hljs-comment">//&#x8BBE;&#x7F6E;&#x56DE;&#x8C03;&#xFF1A;&#x5BF9;&#x4E8E;&#x4EE3;&#x7406;&#x7C7B;&#x4E0A;&#x6240;&#x6709;&#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x90FD;&#x4F1A;&#x8C03;&#x7528;CallBack&#xFF0C;&#x800C;Callback&#x5219;&#x9700;&#x8981;&#x5B9E;&#x73B0;intercept()&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x62E6;</span>
+        enhancer.setCallback(<span class="hljs-keyword">this</span>);
+        <span class="hljs-comment">// &#x521B;&#x5EFA;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x7C7B;&#x5BF9;&#x8C61;&#x5E76;&#x8FD4;&#x56DE;</span>
+        <span class="hljs-keyword">return</span> enhancer.create();
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">intercept</span><span class="hljs-params">(Object o, Method method, Object[] objects, MethodProxy methodProxy)</span> <span class="hljs-keyword">throws</span> Throwable </span>{
+        System.out.println(<span class="hljs-string">&quot;&#x9884;&#x5904;&#x7406;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&quot;</span>);
+        Object result = methodProxy.invokeSuper(o, objects);
+        System.out.println(result);
+        System.out.println(<span class="hljs-string">&quot;&#x8C03;&#x7528;&#x540E;&#x64CD;&#x4F5C;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&#x2014;&quot;</span>);
+        <span class="hljs-keyword">return</span> result;
+    }
+</code></pre>
+<ul>
+<li>&#x4EE3;&#x7406;&#x6D4B;&#x8BD5;&#x7C7B;</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DynamicProxyDriver</span> </span>{
+
+    <span class="hljs-comment">/**
+     * jdk&#x4EE3;&#x7406;&#x5BF9;&#x8C61;
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> People <span class="hljs-title">getPersonProxy</span><span class="hljs-params">(People people)</span> </span>{
+        <span class="hljs-keyword">return</span> (People) Proxy.newProxyInstance(people.getClass().getClassLoader(), people.getClass().getInterfaces(), <span class="hljs-keyword">new</span> DynamicProxy(people));
+    }
+
+    <span class="hljs-comment">/**
+     * cglib &#x4EE3;&#x7406;&#x5BF9;&#x8C61;
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> People <span class="hljs-title">getCglibProxy</span><span class="hljs-params">(People people)</span> </span>{
+        <span class="hljs-keyword">return</span> (People) <span class="hljs-keyword">new</span> CglibProxy().getInstance(people);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        People people = <span class="hljs-keyword">new</span> Student();
+        People proxyPeople = getPersonProxy(people);
+        proxyPeople.doOperation(<span class="hljs-string">&quot;&#x5F20;&#x4E09;&quot;</span>, <span class="hljs-string">&quot;&#x63D0;&#x4EA4;&#x4F5C;&#x4E1A;&#xFF01;&quot;</span>);
+
+        People cglibPeople = getCglibProxy(people);
+        cglibPeople.doOperation(<span class="hljs-string">&quot;&#x5F20;&#x4E09;&quot;</span>, <span class="hljs-string">&quot;&#x63D0;&#x4EA4;&#x4F5C;&#x4E1A;&#xFF01;&quot;</span>);
+    }
+
+
+    <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">People</span> </span>{
+        <span class="hljs-function">String <span class="hljs-title">doOperation</span><span class="hljs-params">(String name, String action)</span></span>;
+    }
+
+    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">People</span> </span>{
+
+
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">doOperation</span><span class="hljs-params">(String name, String action)</span> </span>{
+            <span class="hljs-keyword">return</span> name + <span class="hljs-string">&quot;&#x6B63;&#x5728;&quot;</span> + action;
+        }
+
+    }
+}
+</code></pre>
 
                                 
                                 </section>
@@ -766,12 +923,12 @@
 
             
                 
-                <a href="../CONTAINER/BASE.html" class="navigation navigation-prev " aria-label="Previous page: LINUX+DOCKER">
+                <a href="Strategy.html" class="navigation navigation-prev " aria-label="Previous page: 策略模式">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="idea.html" class="navigation navigation-next " aria-label="Next page: idea快捷键大全">
+                <a href="../DISTRIBUTED/BASE.html" class="navigation navigation-next " aria-label="Next page: 分布式">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -782,7 +939,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"附录","level":"1.13","depth":1,"next":{"title":"idea快捷键大全","level":"1.13.1","depth":2,"path":"appendix/idea.md","ref":"appendix/idea.md","articles":[]},"previous":{"title":"LINUX+DOCKER","level":"1.12","depth":1,"path":"CONTAINER/BASE.md","ref":"CONTAINER/BASE.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"appendix/base.md","mtime":"2019-08-20T02:14:22.260Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-11T15:00:56.569Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"代理模式","level":"1.10.3","depth":2,"next":{"title":"分布式","level":"1.11","depth":1,"path":"DISTRIBUTED/BASE.md","ref":"DISTRIBUTED/BASE.md","articles":[{"title":"分布式事务","level":"1.11.1","depth":2,"path":"DISTRIBUTED/ACID.md","ref":"DISTRIBUTED/ACID.md","articles":[]},{"title":"Zookeeper","level":"1.11.2","depth":2,"path":"DISTRIBUTED/zk.md","ref":"DISTRIBUTED/zk.md","articles":[]},{"title":"redis","level":"1.11.3","depth":2,"path":"DISTRIBUTED/redis.md","ref":"DISTRIBUTED/redis.md","articles":[]}]},"previous":{"title":"策略模式","level":"1.10.2","depth":2,"path":"DESIGN/Strategy.md","ref":"DESIGN/Strategy.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["github","theme-default","back-to-top-button","chapter-fold","expandable-chapters-small","code","-lunr","-search","search-pro"],"pluginsConfig":{"chapter-fold":{},"github":{"url":"https://github.com/CosmosNi/cosmos-tutorial"},"search-pro":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"expandable-chapters-small":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"DESIGN/proxy.md","mtime":"2019-09-11T00:50:45.160Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-11T15:00:56.569Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
