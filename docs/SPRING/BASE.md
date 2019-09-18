@@ -65,3 +65,11 @@ DefaultListableBeanFatory是整个bean加载的核心部分，是spring注册及
 - 容器关闭后，如果bean实现了DisposableBean，则会回调该接口的destroy（）方法
 - 通过给destroy-method指定函数，可以在bean销毁前执行指定的逻辑
 
+###### 1.5 bean的作用域
+
+1. ingleton：默认，每个容器中只有一个bean的实例，单例的模式由BeanFactory自身来维护。
+2. prototype：为每一个bean请求提供一个实例。
+3. request：为每一个网络请求创建一个实例，在请求完成以后，bean会失效并被垃圾回收器回收。
+4. session：与request范围类似，确保每个session中有一个bean的实例，在session过期后，bean会随之失效。
+5. global-session：全局作用域，global-session和Portlet应用相关。当你的应用部署在Portlet容器中工作时，它包含很多portlet。如果你想要声明让所有的portlet共用全局的存储变量的话，那么这全局变量需要存储在global-session中。全局作用域与Servlet中的session作用域效果相同。
+
