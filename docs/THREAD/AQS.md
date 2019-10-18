@@ -2,6 +2,7 @@
 
 ###  Node节点（线程状态维护）
 AQS中维护线程状态是通过一个内部类Node来维护的。源码如下
+
 ```java
 static final class Node {
         //节点在共享模式下的标记
@@ -57,13 +58,17 @@ static final class Node {
 ```
 
 
+
+
+
+
 ###  独占锁
 四维导图
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190711140810617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NjYxNzk4,size_16,color_FFFFFF,t_70)
 1. 获取锁
 
 ```java
-   public final void acquire(int arg) {
+public final void acquire(int arg) {
      //尝试获取锁资源，失败则创建等待队列，此处的tryAcquire由子类进行实现
     if (!tryAcquire(arg) &&
         acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
@@ -95,6 +100,8 @@ private Node addWaiter(Node mode) {
 }
 ```
 
+
+
 3. 节点加入队尾
 
 ```java
@@ -121,6 +128,9 @@ private Node enq(final Node node) {
     }
 }
 ```
+
+
+
 4. 将节点加入等待队列后，先判断是否能够获取锁的资源，不能则进入挂起状态等待唤醒
 
 ```java
@@ -333,7 +343,8 @@ private void setHeadAndPropagate(Node node, int propagate) {
 ```
 
 3. 具体的唤醒逻辑
-  ```java
+
+```java
 private void doReleaseShared() {
        for (;;) {
            Node h = head;
@@ -358,10 +369,11 @@ private void doReleaseShared() {
                break;
        }
    }
+```
 
-  ```
 
-```java 
+
+```java
 //唤醒node节点的后继节点
 private void unparkSuccessor(Node node) {
       //节点的等待状态
@@ -382,16 +394,13 @@ private void unparkSuccessor(Node node) {
        if (s != null)
           //唤醒线程
            LockSupport.unpark(s.thread);
-   }##  定义
-AQS是类AbstractQueuedSynchronizer的简称（以下均以AQS代替），提供了一种实现堵塞锁（独占锁）和一系列FIFO等待队列（共享锁）的同步框架。
-独占锁：此代码有且只有一个线程能够执行，如ReentrantLock
-共享锁：多个线程可同时获取锁，如Semaphore/CountDownLatch
+   }
+
+```
 
 
-##  AQS源码
-###  Node节点（线程状态维护）
-AQS中维护线程状态是通过一个内部类Node来维护的。源码如下
-​```
+
+```java
 static final class Node {
         //节点在共享模式下的标记
         static final Node SHARED = new Node();
@@ -443,27 +452,27 @@ static final class Node {
             this.thread = thread;
         }
     }
-​```
-
+```
 
 ###  独占锁
 四维导图
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190711140810617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NjYxNzk4,size_16,color_FFFFFF,t_70)
+
 1. 获取锁
 
-​```
-   public final void acquire(int arg) {
+```java
+public final void acquire(int arg) {
      //尝试获取锁资源，失败则创建等待队列，此处的tryAcquire由子类进行实现
     if (!tryAcquire(arg) &&
         acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
         //中断当前线程
         selfInterrupt();
 }
-​```
+```
 
 2. 将Node加入等待队列
 
-​```
+```
 private Node addWaiter(Node mode) {
     Node node = new Node(Thread.currentThread(), mode);
     //记录当前尾节点
@@ -482,11 +491,11 @@ private Node addWaiter(Node mode) {
     enq(node);
     return node;
 }
-​```
+```
 
 3. 节点加入队尾
 
-​```
+```java
 private Node enq(final Node node) {
 //自旋锁，失败重试
     for (;;) {
@@ -509,10 +518,11 @@ private Node enq(final Node node) {
         }
     }
 }
-​```
+```
+
 4. 将节点加入等待队列后，先判断是否能够获取锁的资源，不能则进入挂起状态等待唤醒
 
-​```
+```java
 final boolean acquireQueued(final Node node, int arg) {
         //锁资源获取失败标记位
         boolean failed = true;
@@ -546,10 +556,13 @@ final boolean acquireQueued(final Node node, int arg) {
                 cancelAcquire(node);
         }
     }
-​```
+```
+
+
 
 5. 检测节点状态，判断是否可进入挂起状态，同时剔除前边已经取消的节点
-​```
+
+```java
 private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
         //获取前置节点的waitStatus
         int ws = pred.waitStatus;
@@ -568,19 +581,26 @@ private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
         }
         return false;
     }
-​```
+```
+
+
+
 6. 堵塞线程
-​```
-    private final boolean parkAndCheckInterrupt() {
+
+```java
+ private final boolean parkAndCheckInterrupt() {
       //堵塞线程
     LockSupport.park(this);
     //被唤醒之后，返回中断标记，即如果是正常唤醒则返回false，如果是由于中断醒来，就返回true
     return Thread.interrupted();
 }
-​```
+```
+
+
+
 7. 获取锁或则加入等待队列失败后的处理
 
-​```
+```java
 private void cancelAcquire(Node node) {
         if (node == null)
             return;
@@ -617,12 +637,13 @@ private void cancelAcquire(Node node) {
             node.next = node; // help GC
         }
     }
-​```
+```
+
 
 
 8. 锁的释放
 
-​```
+```java
 public final boolean release(int arg) {
   // 调用tryRelease方法，尝试去释放锁，由子类具体实现
     if (tryRelease(arg)) {
@@ -636,11 +657,11 @@ public final boolean release(int arg) {
     }
     return false;
 }
-​```
+```
 
 9. 线程唤醒
 
-​```
+```java
 private void unparkSuccessor(Node node) {
 
         int ws = node.waitStatus;
@@ -660,11 +681,14 @@ private void unparkSuccessor(Node node) {
            //唤醒线程
             LockSupport.unpark(s.thread);
     }
-​```
+```
+
+
 
  ### 共享锁的实现
  1.释放共享锁
-​```
+
+```java
 private void doAcquireShared(int arg) {
       // 创建一个共享锁节点
        final Node node = addWaiter(Node.SHARED);
@@ -701,10 +725,11 @@ private void doAcquireShared(int arg) {
        }
    }
 
+```
 
-​```
 2. 线程唤醒
-​```
+
+```java
 private void setHeadAndPropagate(Node node, int propagate) {
         //记录头结点以便检查
         Node h = head;
@@ -722,7 +747,8 @@ private void setHeadAndPropagate(Node node, int propagate) {
 ```
 
 3. 具体的唤醒逻辑
-  ```
+
+```java
 private void doReleaseShared() {
        for (;;) {
            Node h = head;
@@ -747,7 +773,11 @@ private void doReleaseShared() {
                break;
        }
    }
+```
 
+
+
+```java
 //唤醒node节点的后继节点
 private void unparkSuccessor(Node node) {
       //节点的等待状态
@@ -769,5 +799,5 @@ private void unparkSuccessor(Node node) {
           //唤醒线程
            LockSupport.unpark(s.thread);
    }
+```
 
-  ```
